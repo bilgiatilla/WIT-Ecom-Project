@@ -1,11 +1,18 @@
+import Bestseller from "./HomepageSections/Bestseller";
+import EditorsPick from "./HomepageSections/EditorsPick";
+import Featured from "./HomepageSections/Featured";
+import MainSlider from "./HomepageSections/MainSlider";
+import NeutrelUniverse from "./HomepageSections/NeutrelUniverse";
+import VitaClassic from "./HomepageSections/VitaClassic";
+
 function HomePage() {
   return <div>
-      <section className="font-[montserrat]">Main Slider</section>
-      <section>Editor's Pick</section>
-      <section>Bestseller Products</section>
-      <section>Vita Classic Slider</section>
-      <section>Neutral Universe</section>
-      <section>Featured Products</section>
+      <MainSlider />
+      <EditorsPick />
+      <Bestseller />
+      <VitaClassic />
+      <NeutrelUniverse />
+      <Featured />
       </div>;
 }
 

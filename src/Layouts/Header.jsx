@@ -1,5 +1,4 @@
 import { Search, ShoppingCart, Menu } from "lucide-react";
-import { Link } from "react-router-dom";
 
 function Header() {
   return <header>
