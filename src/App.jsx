@@ -1,10 +1,12 @@
-import Footer from './Components/Footer'
-import Header from "./Components/Header"
+import Footer from './Layouts/Footer'
+import Header from "./Layouts/Header"
+import PageContent from './Layouts/PageContent'
 
 function App() {
   return (
     <div>
       <Header />
+      <PageContent/>
       <Footer/>
     </div>
   )
