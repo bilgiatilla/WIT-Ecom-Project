@@ -1,12 +1,20 @@
+import { Route, Routes } from "react-router-dom"
 import Footer from './Layouts/Footer'
 import Header from "./Layouts/Header"
 import PageContent from './Layouts/PageContent'
+import HomePage from "./Pages/Homepage";
+import ProductPage from './Pages/ProductPage';
 
 function App() {
   return (
-    <div>
+    <div className="font-[montserrat]">
       <Header />
-      <PageContent/>
+      <PageContent>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/products" element={<ProductPage />} />
+        </Routes>
+      </PageContent>
       <Footer/>
     </div>
   )
