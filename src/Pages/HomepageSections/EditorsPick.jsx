@@ -8,7 +8,7 @@ function EditorsPick() {
       <div className="grid p-10 gap-8">
         <div className="relative">
           <img
-            src="src\assets\men.jpg"
+            src="src\assets\Categories\men.jpg"
             alt="Men"
             className="w-full h-120 object-cover"
           />
@@ -17,7 +17,7 @@ function EditorsPick() {
 
         <div className="relative">
           <img
-            src="src\assets\women.jpg"
+            src="src\assets\Categories\women.jpg"
             alt="Women"
             className="w-full h-120 object-cover"
           />
@@ -26,7 +26,7 @@ function EditorsPick() {
 
         <div className="relative">
           <img
-            src="src\assets\accessories.jpg"
+            src="src\assets\Categories\accessories.jpg"
             alt="Accessories"
             className="w-full h-60 object-cover"
           />
@@ -34,7 +34,7 @@ function EditorsPick() {
         </div>
 
         <div className="relative">
-          <img src="src\assets\kids.jpg"
+          <img src="src\assets\Categories\kids.jpg"
                alt="Kids"
                className="w-full h-60 object-cover" />
           <button className="absolute bottom-5 left-4 bg-white px-8 py-3 text-md font-bold">KIDS</button>

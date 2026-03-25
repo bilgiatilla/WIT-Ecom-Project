@@ -2,7 +2,7 @@ import Bestseller from "./HomepageSections/Bestseller";
 import EditorsPick from "./HomepageSections/EditorsPick";
 import Featured from "./HomepageSections/Featured";
 import MainSlider from "./HomepageSections/MainSlider";
-import NeutrelUniverse from "./HomepageSections/NeutrelUniverse";
+import NeuralUniverse from "./HomepageSections/NeuralUniverse";
 import VitaClassic from "./HomepageSections/VitaClassic";
 
 function HomePage() {
@@ -11,7 +11,7 @@ function HomePage() {
       <EditorsPick />
       <Bestseller />
       <VitaClassic />
-      <NeutrelUniverse />
+      <NeuralUniverse />
       <Featured />
       </div>;
 }
