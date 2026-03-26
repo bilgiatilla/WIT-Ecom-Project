@@ -10,7 +10,7 @@ function Bestseller() {
     { id: 8, image: "src/assets/Bestseller/bestseller1.png" },
   ];
   return (
-    <section className="px-10 justify-center">
+    <section className="px-10 lg:px-40 justify-center">
       <div className="grid gap-3 text-center p-10">
         <h4 className="text-lg">Featured Products</h4>
         <h3 className="font-bold text-xl">BESTSELLER PRODUCTS</h3>
@@ -18,6 +18,7 @@ function Bestseller() {
           Problems trying to resolve the conflict between
         </p>
       </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
       {products.map((product) => (
         <div key={product.id} className="text-center grid gap-2 py-5 justify-center">
           <img src={product.image} />
@@ -36,6 +37,7 @@ function Bestseller() {
           </div>
         </div>
       ))}
+      </div>
     </section>
   );
 }
