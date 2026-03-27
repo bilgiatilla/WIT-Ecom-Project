@@ -4,6 +4,7 @@ import Header from "./Layouts/Header"
 import PageContent from './Layouts/PageContent'
 import HomePage from "./Pages/Homepage";
 import ProductPage from './Pages/ProductPage';
+import ShopPage from "./Pages/ShopPage";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/products" element={<ProductPage />} />
+          <Route path="/shop" element={<ShopPage />} />
         </Routes>
       </PageContent>
       <Footer/>

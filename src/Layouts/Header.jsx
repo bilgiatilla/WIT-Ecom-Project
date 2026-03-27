@@ -7,6 +7,7 @@ import {
   UserRound,
   Heart,
 } from "lucide-react";
+import { Link } from "react-router-dom";
 
 function Header() {
   return (
@@ -32,8 +33,8 @@ function Header() {
       <div className="flex justify-between  p-10">
         <h3 className="font-bold text-xl">Bandage</h3>
         <div className="hidden lg:flex justify-center gap-5">
-          <a href="">Home</a>
-          <a href="">Shop</a>
+          <Link to="/">Home</Link>
+          <Link to="/shop">Shop</Link>
           <a href="">About</a>
           <a href="">Blog</a>
           <a href="">Contact</a>
@@ -56,8 +57,8 @@ function Header() {
         </div>
       </div>
       <div className="grid justify-center lg:hidden gap-3 pt-5 pb-10 text-[#737373] text-lg font-semibold">
-        <a href="">Home</a>
-        <a href="">Product</a>
+        <Link to="/">Home</Link>
+        <Link to="/products">Products</Link>
         <a href="">Pricing</a>
         <a href="">Contact</a>
       </div>
