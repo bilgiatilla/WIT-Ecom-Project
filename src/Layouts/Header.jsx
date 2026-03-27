@@ -32,7 +32,7 @@ function Header() {
       </div>
       <div className="flex justify-between  p-10">
         <h3 className="font-bold text-xl">Bandage</h3>
-        <div className="hidden lg:flex justify-center gap-5">
+        <div className="hidden lg:flex justify-center gap-5 font-bold  text-gray-500">
           <Link to="/">Home</Link>
           <Link to="/shop">Shop</Link>
           <a href="">About</a>
