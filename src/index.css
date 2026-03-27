@@ -1,1 +1,28 @@
 @import "tailwindcss";
+
+.hero-swiper .swiper-pagination-bullet {
+  width: 40px;
+  height: 6px;
+  border-radius: 999px;
+  background: white;
+  opacity: 0.5;
+}
+
+.hero-swiper .swiper-pagination-bullet-active {
+  opacity: 1;
+  background: white;
+}
+
+.hero-swiper .swiper-button-next {
+    color: white;
+    height: 3rem;
+    right: 16px !important;
+}
+.hero-swiper .swiper-button-prev {
+    color: white;
+    height: 3rem;
+    left: 16px !important;
+}
+.hero-swiper .swiper-pagination {
+  bottom: 50px !important;
+}
