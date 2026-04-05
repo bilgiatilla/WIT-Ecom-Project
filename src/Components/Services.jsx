@@ -1,10 +1,17 @@
+import hooli from "../assets/Logos/hooli.svg";
+import lyft from "../assets/Logos/lyft.svg";
+import pied from "../assets/Logos/pied-piper.svg";
+import stripe from "../assets/Logos/stripe.svg";
+import aws from "../assets/Logos/aws.svg";
+import reddit from "../assets/Logos/reddit.svg";
+
 const logos = [
-        "src/assets/Logos/hooli.svg",
-        "src/assets/Logos/lyft.svg",
-        "src/assets/Logos/pied-piper.svg",
-        "src/assets/Logos/stripe.svg",
-        "src/assets/Logos/aws.svg",
-        "src/assets/Logos/reddit.svg",
+        hooli,
+        lyft,
+        pied,
+        stripe,
+        aws,
+        reddit,
     ] 
 
 function BrandLogos() {

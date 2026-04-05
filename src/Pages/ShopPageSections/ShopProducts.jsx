@@ -2,23 +2,24 @@ import { ChevronDown, LayoutGrid, ListChecks } from "lucide-react";
 import { useState } from "react";
 import Pagination from "../../Components/Pagination.jsx";
 import BrandLogos from "../../Components/Services.jsx";
+import bestseller from "../../assets/Bestseller/bestseller1.png";
 
 function ShopProducts() {
   const [open, setOpen] = useState(false);
 
   const products = [
-    { id: 1, image: "src/assets/Bestseller/bestseller1.png" },
-    { id: 2, image: "src/assets/Bestseller/bestseller1.png" },
-    { id: 3, image: "src/assets/Bestseller/bestseller1.png" },
-    { id: 4, image: "src/assets/Bestseller/bestseller1.png" },
-    { id: 5, image: "src/assets/Bestseller/bestseller1.png" },
-    { id: 6, image: "src/assets/Bestseller/bestseller1.png" },
-    { id: 7, image: "src/assets/Bestseller/bestseller1.png" },
-    { id: 8, image: "src/assets/Bestseller/bestseller1.png" },
-    { id: 9, image: "src/assets/Bestseller/bestseller1.png" },
-    { id: 10, image: "src/assets/Bestseller/bestseller1.png" },
-    { id: 11, image: "src/assets/Bestseller/bestseller1.png" },
-    { id: 12, image: "src/assets/Bestseller/bestseller1.png" },
+    { id: 1, image: {bestseller} },
+    { id: 2, image: {bestseller} },
+    { id: 3, image: {bestseller} },
+    { id: 4, image: {bestseller} },
+    { id: 5, image: {bestseller} },
+    { id: 6, image: {bestseller} },
+    { id: 7, image: {bestseller} },
+    { id: 8, image: {bestseller} },
+    { id: 9, image: {bestseller} },
+    { id: 10, image: {bestseller} },
+    { id: 11, image: {bestseller} },
+    { id: 12, image: {bestseller} },
   ];
   const [currentPage, setCurrentPage] = useState(2);
 

@@ -1,10 +1,16 @@
+import cardCover5 from "../../assets/ShopCards/card-cover-5.jpg";
+import cardCover6 from "../../assets/ShopCards/card-cover-6.jpg";
+import cardCover7 from "../../assets/ShopCards/card-cover-7.jpg";
+import cardCover8 from "../../assets/ShopCards/card-cover-8.jpg";
+import cardCover9 from "../../assets/ShopCards/card-cover-9.jpg";
+
 function Cloths() {
   const posts = [
-    { id: 1, image: "src/assets/ShopCards/card-cover-5.jpg" },
-    { id: 2, image: "src/assets/ShopCards/card-cover-6.jpg" },
-    { id: 3, image: "src/assets/ShopCards/card-cover-7.jpg" },
-    { id: 4, image: "src/assets/ShopCards/card-cover-8.jpg" },
-    { id: 5, image: "src/assets/ShopCards/card-cover-9.jpg" },
+    { id: 1, image: {cardCover5} },
+    { id: 2, image: {cardCover6} },
+    { id: 3, image: {cardCover7} },
+    { id: 4, image: {cardCover8} },
+    { id: 5, image: {cardCover9} },
   ];
   return (
     <div className="flex flex-col lg:flex-row lg:justify-center gap-6">

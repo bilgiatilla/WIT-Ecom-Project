@@ -7,10 +7,14 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import cardCover5 from "../../assets/ShopCards/card-cover-5.jpg";
+import cardCover6 from "../../assets/ShopCards/card-cover-6.jpg";
+import cardCover7 from "../../assets/ShopCards/card-cover-7.jpg";
+
 const productImages = [
-  "src/assets/ShopCards/card-cover-5.jpg",
-  "src/assets/ShopCards/card-cover-6.jpg",
-  "src/assets/ShopCards/card-cover-7.jpg",
+  cardCover5,
+  cardCover6,
+  cardCover7,
 ];
 
 function ProductCard() {

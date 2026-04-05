@@ -1,10 +1,14 @@
 import { AlarmClock, ChartArea } from "lucide-react";
+import featuredImg1 from "../../assets/Featured/featuredproducts1.png";
+import featuredImg2 from "../../assets/Featured/featuredproducts2.png";
+import featuredImg3 from "../../assets/Featured/featuredproducts3.png";
+
 
 function Featured() {
   const posts = [
-    { id: 1, image: "src/assets/Featured/featuredproducts1.png" },
-    { id: 2, image: "src/assets/Featured/featuredproducts2.png" },
-    { id: 3, image: "src/assets/Featured/featuredproducts3.png" },
+    { id: 1, image: {featuredImg1} },
+    { id: 2, image: {featuredImg2} },
+    { id: 3, image: {featuredImg3} },
   ];
   return (
     <div>

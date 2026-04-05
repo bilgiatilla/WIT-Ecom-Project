@@ -1,3 +1,8 @@
+import menImg from "../../assets/Categories/men.jpg";
+import womenImg from "../../assets/Categories/women.jpg";
+import kidsImg from "../../assets/Categories/kids.jpg";
+import accImg from "../../assets/Categories/accessories.jpg";
+
 function EditorsPick() {
   return (
     <section className="pt-15 text-center justify-center">
@@ -10,7 +15,7 @@ function EditorsPick() {
       <div className="grid p-10 gap-8 lg:hidden">
         <div className="relative">
           <img
-            src="src/assets/Categories/men.jpg"
+            src={menImg}
             alt="Men"
             className="w-full h-120 object-cover"
           />
@@ -21,7 +26,7 @@ function EditorsPick() {
 
         <div className="relative">
           <img
-            src="src/assets/Categories/women.jpg"
+            src={womenImg}
             alt="Women"
             className="w-full h-120 object-cover"
           />
@@ -32,7 +37,7 @@ function EditorsPick() {
 
         <div className="relative">
           <img
-            src="src/assets/Categories/accessories.jpg"
+            src={accImg}
             alt="Accessories"
             className="w-full h-60 object-cover"
           />
@@ -43,7 +48,7 @@ function EditorsPick() {
 
         <div className="relative">
           <img
-            src="src/assets/Categories/kids.jpg"
+            src={kidsImg}
             alt="Kids"
             className="w-full h-60 object-cover"
           />

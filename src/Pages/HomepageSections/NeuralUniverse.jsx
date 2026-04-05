@@ -1,3 +1,5 @@
+import neuImg from "../../assets/neural-cover.png";
+
 function NeuralUniverse() {
   return <section className="text-center flex flex-col lg:flex-row w-fill lg:max-w-400">
     <div className="pt-20 px-20 lg:order-2 lg:w-1/2 lg:text-start lg:pt-40 flex flex-col gap-5 lg:gap-10">
@@ -10,7 +12,7 @@ function NeuralUniverse() {
     </div>
     </div>
     <div className="w-full lg:order-1 lg:w-1/2">
-      <img src="src\assets\neural-cover.png" alt="neural" className="w-full"/>
+      <img src={neuImg} alt="neural" className="w-full"/>
     </div>
   </section>
 }

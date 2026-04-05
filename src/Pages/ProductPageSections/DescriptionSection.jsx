@@ -1,4 +1,5 @@
 import { ChevronRight } from "lucide-react";
+import cardCover5 from "../../assets/ShopCards/card-cover-5.jpg";
 
 function DescriptionSection() {
   return (
@@ -14,7 +15,7 @@ function DescriptionSection() {
       <div className="w-80 aspect-square overflow-hidden rounded-xl shadow-xl mx-auto mt-15 flex-1">
         <img
           className="w-full h-full object-cover object-center"
-          src="src/assets/ShopCards/card-cover-5.jpg"
+          src={cardCover5}
         ></img>
       </div>
       <div className="pt-10 mx-7 flex-1">

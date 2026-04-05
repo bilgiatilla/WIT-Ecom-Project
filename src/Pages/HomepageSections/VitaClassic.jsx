@@ -1,6 +1,6 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
-
+import vitaImg from "../../assets/vita-cover.png";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -50,7 +50,7 @@ function VitaClassic() {
     </div>
   </section>
   <section className="bg-[#23856D] lg:w-1/2 flex justify-center">
-    <img src="src/assets/vita-cover.png" alt="cover" className="lg:w-auto lg:h-full lg:object-contain pt-20" />
+    <img src={vitaImg} alt="cover" className="lg:w-auto lg:h-full lg:object-contain pt-20" />
   </section>
   </div>
   </SwiperSlide>
