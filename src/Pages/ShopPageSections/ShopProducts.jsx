@@ -8,18 +8,18 @@ function ShopProducts() {
   const [open, setOpen] = useState(false);
 
   const products = [
-    { id: 1, image: {bestseller} },
-    { id: 2, image: {bestseller} },
-    { id: 3, image: {bestseller} },
-    { id: 4, image: {bestseller} },
-    { id: 5, image: {bestseller} },
-    { id: 6, image: {bestseller} },
-    { id: 7, image: {bestseller} },
-    { id: 8, image: {bestseller} },
-    { id: 9, image: {bestseller} },
-    { id: 10, image: {bestseller} },
-    { id: 11, image: {bestseller} },
-    { id: 12, image: {bestseller} },
+    { id: 1, image: bestseller },
+    { id: 2, image: bestseller },
+    { id: 3, image: bestseller },
+    { id: 4, image: bestseller },
+    { id: 5, image: bestseller },
+    { id: 6, image: bestseller },
+    { id: 7, image: bestseller },
+    { id: 8, image: bestseller },
+    { id: 9, image: bestseller },
+    { id: 10, image: bestseller },
+    { id: 11, image: bestseller },
+    { id: 12, image: bestseller },
   ];
   const [currentPage, setCurrentPage] = useState(2);
 

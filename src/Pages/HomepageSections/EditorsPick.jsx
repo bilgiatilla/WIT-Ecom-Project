@@ -60,7 +60,7 @@ function EditorsPick() {
       <div className="hidden lg:grid grid-cols-3 gap-8 p-10">
         <div className="relative">
           <img
-            src="src/assets/Categories/men.jpg"
+            src={menImg}
             className="w-full h-120 object-cover"
           />
           <h5 className="absolute bottom-5 left-5 bg-white px-10 py-2 font-bold">
@@ -70,7 +70,7 @@ function EditorsPick() {
 
         <div className="relative">
           <img
-            src="src/assets/Categories/women.jpg"
+            src={womenImg}
             className="w-full h-120 object-cover"
           />
           <h5 className="absolute bottom-5 left-5 bg-white px-10 py-2 font-bold">
@@ -81,7 +81,7 @@ function EditorsPick() {
         <div className="grid grid-rows-2 gap-8">
           <div className="relative">
             <img
-              src="src/assets/Categories/accessories.jpg"
+              src={accImg}
               className="w-full h-55 object-cover"
             />
             <h5 className="absolute bottom-5 left-4 bg-white px-6 py-2 font-bold">
@@ -91,7 +91,7 @@ function EditorsPick() {
 
           <div className="relative">
             <img
-              src="src/assets/Categories/kids.jpg"
+              src={kidsImg}
               className="w-full h-55 object-cover"
             />
             <h5 className="absolute bottom-5 left-4 bg-white px-6 py-2 font-bold">

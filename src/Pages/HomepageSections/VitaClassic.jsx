@@ -32,7 +32,7 @@ function VitaClassic() {
     </div>
   </section>
   <section className="bg-[#23856D] lg:w-1/2 flex justify-center">
-    <img src="src/assets/vita-cover.png" alt="cover" className="lg:w-auto lg:h-full lg:object-contain pt-20" />
+    <img src={vitaImg} alt="cover" className="lg:w-auto lg:h-full lg:object-contain pt-20" />
   </section>
   </div>
   </SwiperSlide>

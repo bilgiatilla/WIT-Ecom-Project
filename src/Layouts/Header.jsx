@@ -37,7 +37,7 @@ function Header() {
           <Link to="/shop">Shop</Link>
           <a href="">About</a>
           <a href="">Blog</a>
-          <a href="">Contact</a>
+          <Link to="/contact">Contact</Link>
           <a href="">Pages</a>
         </div>
 

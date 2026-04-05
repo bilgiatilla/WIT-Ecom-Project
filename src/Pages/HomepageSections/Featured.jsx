@@ -6,9 +6,9 @@ import featuredImg3 from "../../assets/Featured/featuredproducts3.png";
 
 function Featured() {
   const posts = [
-    { id: 1, image: {featuredImg1} },
-    { id: 2, image: {featuredImg2} },
-    { id: 3, image: {featuredImg3} },
+    { id: 1, image: featuredImg1 },
+    { id: 2, image: featuredImg2 },
+    { id: 3, image: featuredImg3 },
   ];
   return (
     <div>

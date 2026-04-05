@@ -5,6 +5,8 @@ import PageContent from './Layouts/PageContent'
 import HomePage from "./Pages/Homepage";
 import ProductPage from './Pages/ProductPage';
 import ShopPage from "./Pages/ShopPage";
+import ContactPage from "./Pages/Contact.Page";
+import TeamPage from "./Pages/TeamPage";
 
 function App() {
   return (
@@ -15,6 +17,8 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/product/:id" element={<ProductPage />} />
           <Route path="/shop" element={<ShopPage />} />
+          <Route path="/contact" element={<ContactPage />}/>
+          <Route path="/team" element={<TeamPage />}/>
         </Routes>
       </PageContent>
       <Footer/>

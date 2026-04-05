@@ -6,11 +6,11 @@ import cardCover9 from "../../assets/ShopCards/card-cover-9.jpg";
 
 function Cloths() {
   const posts = [
-    { id: 1, image: {cardCover5} },
-    { id: 2, image: {cardCover6} },
-    { id: 3, image: {cardCover7} },
-    { id: 4, image: {cardCover8} },
-    { id: 5, image: {cardCover9} },
+    { id: 1, image: cardCover5 },
+    { id: 2, image: cardCover6 },
+    { id: 3, image: cardCover7 },
+    { id: 4, image: cardCover8 },
+    { id: 5, image: cardCover9 },
   ];
   return (
     <div className="flex flex-col lg:flex-row lg:justify-center gap-6">
