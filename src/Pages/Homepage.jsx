@@ -1,4 +1,4 @@
-import Bestseller from "./HomepageSections/Bestseller";
+import BestsellerProducts from "./HomepageSections/BestsellerProducts";
 import EditorsPick from "./HomepageSections/EditorsPick";
 import Featured from "./HomepageSections/Featured";
 import MainSlider from "./HomepageSections/MainSlider";
@@ -9,7 +9,7 @@ function HomePage() {
   return <div>
       <MainSlider />
       <EditorsPick />
-      <Bestseller />
+      <BestsellerProducts />
       <VitaClassic />
       <NeuralUniverse />
       <Featured />

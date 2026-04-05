@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 function Bestseller() {
   const products = [
     { id: 1, image: "src/assets/Bestseller/bestseller1.png" },
@@ -11,15 +13,9 @@ function Bestseller() {
   ];
   return (
     <section className="px-10 lg:px-40 justify-center">
-      <div className="grid gap-3 text-center p-10">
-        <h4 className="text-lg">Featured Products</h4>
-        <h3 className="font-bold text-xl">BESTSELLER PRODUCTS</h3>
-        <p className="text-sm">
-          Problems trying to resolve the conflict between
-        </p>
-      </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
       {products.map((product) => (
+        <Link key={product.id} to={`/product/${product.id}`}>
         <div key={product.id} className="text-center grid gap-2 py-5 justify-center">
           <img src={product.image} />
 
@@ -36,6 +32,7 @@ function Bestseller() {
             <span className="w-4 h-4 rounded-full bg-gray-800"></span>
           </div>
         </div>
+        </Link>
       ))}
       </div>
     </section>
