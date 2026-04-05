@@ -1,6 +1,6 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
-
+import heroSlide from "../../assets/hero-slide.jpg";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -35,7 +35,7 @@ function MainSlider() {
       </SwiperSlide>
       <SwiperSlide>
         <div className="h-160 lg:h-220 bg-cover bg-center text-white" 
-      style={{ backgroundImage: "url('/src/assets/hero-slide.jpg')"}}>
+      style={{ backgroundImage: `url(${heroSlide})`}}>
         <div className="grid text-center lg:text-start pt-40 lg:pt-60 mx-18 lg:mx-30 gap-10">
         <h5 className="font-bold">SUMMER 2020</h5>
         <h2 className="font-bold text-3xl lg:text-6xl">NEW COLLECTION</h2>
