@@ -7,6 +7,7 @@ import ProductPage from './Pages/ProductPage';
 import ShopPage from "./Pages/ShopPage";
 import ContactPage from "./Pages/Contact.Page";
 import TeamPage from "./Pages/TeamPage";
+import AboutPage from "./Pages/AboutPage";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/shop" element={<ShopPage />} />
           <Route path="/contact" element={<ContactPage />}/>
           <Route path="/team" element={<TeamPage />}/>
+          <Route path="/about" element={<AboutPage />}/>
         </Routes>
       </PageContent>
       <Footer/>

@@ -35,7 +35,7 @@ function Header() {
         <div className="hidden lg:flex justify-center gap-5 font-bold  text-gray-500">
           <Link to="/">Home</Link>
           <Link to="/shop">Shop</Link>
-          <a href="">About</a>
+          <Link to="/about">About</Link>
           <a href="">Blog</a>
           <Link to="/contact">Contact</Link>
           <a href="">Pages</a>
