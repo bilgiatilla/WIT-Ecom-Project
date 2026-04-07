@@ -8,6 +8,9 @@ import ShopPage from "./Pages/ShopPage";
 import ContactPage from "./Pages/Contact.Page";
 import TeamPage from "./Pages/TeamPage";
 import AboutPage from "./Pages/AboutPage";
+import SignupPage from "./Pages/SignupPage";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
@@ -21,7 +24,9 @@ function App() {
           <Route path="/contact" element={<ContactPage />}/>
           <Route path="/team" element={<TeamPage />}/>
           <Route path="/about" element={<AboutPage />}/>
+          <Route path="/signup" element={<SignupPage />} />
         </Routes>
+        <ToastContainer />
       </PageContent>
       <Footer/>
     </div>

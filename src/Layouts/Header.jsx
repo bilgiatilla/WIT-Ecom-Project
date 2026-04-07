@@ -47,10 +47,10 @@ function Header() {
           <Menu size={20} />
         </div>
         <div className="sm:flex flex-row gap-7 text-[#23A6F0] hidden">
-          <a className="flex flex-row font-bold ">
+          <Link className="flex flex-row font-bold" to="/signup">
             {" "}
             <UserRound /> Login / Register
-          </a>
+          </Link>
           <Search />
           <ShoppingCart />
           <Heart />
