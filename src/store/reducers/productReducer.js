@@ -18,13 +18,12 @@ function productReducer(state = initialState, action) {
       return { ...state, total: action.payload };
     case "SET_LIMIT":
       return { ...state, limit: action.payload };
-    case "SET_FETCH_STATE":
-      return { ...state, fetch: action.payload };
-    
     case "SET_OFFSET":
       return { ...state, offset: action.payload };
     case "SET_FILTER":
       return { ...state, filter: action.payload };
+    case "SET_FETCH_STATE":
+      return { ...state, fetch: action.payload };
     default:
       return state;
   }

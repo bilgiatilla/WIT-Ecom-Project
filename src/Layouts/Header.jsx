@@ -8,8 +8,11 @@ import {
   Heart,
 } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import Gravatar from "react-gravatar";
 
 function Header() {
+  const user = useSelector((state) => state.client.user);
   return (
     <header>
       <div className="hidden lg:flex items-center justify-between px-8 py-3 bg-[#252B42] text-white">
@@ -47,10 +50,17 @@ function Header() {
           <Menu size={20} />
         </div>
         <div className="sm:flex flex-row gap-7 text-[#23A6F0] hidden">
+          {user?.email ? (
+        <div>
+          <Gravatar email={user.email} size={40} />
+          <span>{user.name}</span>
+        </div>
+      ) : (
           <Link className="flex flex-row font-bold" to="/signup">
             {" "}
             <UserRound /> Login / Register
           </Link>
+          )}
           <Search />
           <ShoppingCart />
           <Heart />

@@ -4,6 +4,19 @@ export const setUser = (user) => {
     payload: user,
   };
 };
+export const setAddressList = (addressList) => {
+  return {
+    type: "SET_ADDRESS_LIST",
+    payload: addressList,
+  };
+};
+
+export const setCreditCards = (creditCards) => {
+  return {
+    type: "SET_CREDIT_CARDS",
+    payload: creditCards,
+  };
+};
 
 export const setRoles = (roles) => {
   return {

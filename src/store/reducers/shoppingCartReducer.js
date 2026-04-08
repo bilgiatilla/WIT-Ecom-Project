@@ -11,7 +11,7 @@ function shoppingCartReducer(state = initialState, action) {
     case "SET_PAYMENT":
       return { ...state, payment: action.payload };
     case "SET_ADDRESS":
-      return { ...state, adress: action.payload };
+      return { ...state, address: action.payload };
     default:
       return state;
   }
