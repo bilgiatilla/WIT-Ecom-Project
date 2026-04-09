@@ -1,29 +1,44 @@
-import cardCover5 from "../../assets/ShopCards/card-cover-5.jpg";
-import cardCover6 from "../../assets/ShopCards/card-cover-6.jpg";
-import cardCover7 from "../../assets/ShopCards/card-cover-7.jpg";
-import cardCover8 from "../../assets/ShopCards/card-cover-8.jpg";
-import cardCover9 from "../../assets/ShopCards/card-cover-9.jpg";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { fetchCategories } from "../../store/thunks/productThunks";
+import { createCategoryPath } from "../../utils/categoryUtils";
 
 function Cloths() {
-  const posts = [
-    { id: 1, image: cardCover5 },
-    { id: 2, image: cardCover6 },
-    { id: 3, image: cardCover7 },
-    { id: 4, image: cardCover8 },
-    { id: 5, image: cardCover9 },
-  ];
+  const dispatch = useDispatch();
+  const categories = useSelector((state) => state.product.categories);
+
+  useEffect(() => {
+    if (!categories.length) {
+      dispatch(fetchCategories());
+    }
+  }, [dispatch, categories.length]);
+
+  const topCategories = [...categories]
+    .sort((a, b) => b.rating - a.rating)
+    .slice(0, 5);
+
   return (
-    <div className="flex flex-col lg:flex-row lg:justify-center gap-6">
-      {posts.map((post) => (
-        <div key={post.id} className="bg-[#FAFAFA] p-10">
-          <div className="relative w-full aspect-square">
-            <img src={post.image} className="h-full lg:w-100 object-cover" />
-            <div className="absolute inset-0 flex flex-col items-center justify-center text-white bg-black/30 gap-6">
-              <h3 className="text-lg font-bold">CLOTHS</h3>
-              <p className="text-sm font-bold">5 Items</p>
+    <div className="flex flex-col lg:flex-row lg:justify-center gap-6 px-4 lg:px-10 py-8">
+      {topCategories.map((category) => (
+        <Link
+          key={category.id}
+          to={createCategoryPath(category)}
+          className="bg-[#FAFAFA] p-6 block"
+        >
+          <div className="relative w-full aspect-square overflow-hidden">
+            <img
+              src={category.img}
+              alt={category.title}
+              className="w-full h-full lg:w-55 object-cover"
+            />
+
+            <div className="absolute inset-0 flex flex-col items-center justify-center text-white bg-black/30 gap-3">
+              <h3 className="text-lg font-bold uppercase">{category.title}</h3>
+              <p className="text-sm font-bold"><i className="fa-solid fa-star yellow-star text-amber-300"></i>{category.rating}</p>
             </div>
           </div>
-        </div>
+        </Link>
       ))}
     </div>
   );

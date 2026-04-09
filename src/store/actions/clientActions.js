@@ -4,6 +4,11 @@ export const setUser = (user) => {
     payload: user,
   };
 };
+
+export const clearUser = () => ({
+  type: "CLEAR_USER",
+});
+
 export const setAddressList = (addressList) => {
   return {
     type: "SET_ADDRESS_LIST",

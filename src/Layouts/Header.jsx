@@ -10,6 +10,8 @@ import {
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Gravatar from "react-gravatar";
+import HeaderCategoryDropdown from "../Components/HeaderCategoryDropdown";
+
 
 function Header() {
   const user = useSelector((state) => state.client.user);
@@ -37,7 +39,7 @@ function Header() {
         <h3 className="font-bold text-xl">Bandage</h3>
         <div className="hidden lg:flex justify-center gap-5 font-bold  text-gray-500">
           <Link to="/">Home</Link>
-          <Link to="/shop">Shop</Link>
+          <HeaderCategoryDropdown />
           <Link to="/about">About</Link>
           <a href="">Blog</a>
           <Link to="/contact">Contact</Link>
