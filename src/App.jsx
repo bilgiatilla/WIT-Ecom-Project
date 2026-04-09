@@ -18,6 +18,8 @@ import { verifyToken } from "./store/thunks/clientThunks";
 import ShoppingCartPage from "./Pages/ShoppingCartPage";
 import ProtectedRoute from "./Components/ProtectedRoute";
 import CreateOrderPage from "./Pages/CreateOrderPage";
+import OrdersPage from "./Pages/OrdersPage";
+import BlogPage from "./Pages/BlogPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -43,6 +45,7 @@ function App() {
             element={<ProductPage />}
           />
           <Route path="/cart" element={<ShoppingCartPage />} />
+          <Route path="/blog" element={<BlogPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/team" element={<TeamPage />} />
           <Route path="/about" element={<AboutPage />} />
@@ -53,6 +56,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <CreateOrderPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/orders"
+            element={
+              <ProtectedRoute>
+                <OrdersPage />
               </ProtectedRoute>
             }
           />

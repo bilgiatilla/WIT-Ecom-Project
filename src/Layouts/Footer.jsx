@@ -4,9 +4,9 @@ function Footer() {
       <div className="bg-[#FAFAFA] p-15 lg:flex lg:flex-row lg:justify-between ">
         <h3 className="text-2xl font-bold">Bandage</h3>
         <div className="flex flex-row gap-5 pt-5 lg:pt-0">
-          <i className="fa-brands fa-facebook text-[#23A6F0] text-2xl"></i>
-          <i className="fa-brands fa-instagram text-[#23A6F0] text-2xl"></i>
-          <i className="fa-brands fa-twitter text-[#23A6F0] text-2xl"></i>
+          <i className="fa-brands fa-facebook text-[#23A6F0] text-2xl cursor-pointer hover:scale-110 transition-transform"></i>
+          <i className="fa-brands fa-instagram text-[#23A6F0] text-2xl cursor-pointer hover:scale-110 transition-transform"></i>
+          <i className="fa-brands fa-twitter text-[#23A6F0] text-2xl cursor-pointer hover:scale-110 transition-transform"></i>
         </div>
       </div>
       <section className="p-15 flex flex-col lg:flex-row lg:gap-40">

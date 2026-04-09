@@ -35,10 +35,10 @@ function Header() {
         <h6>Follow Us and get a chance to win 80% off</h6>
         <div className="flex flex-row px-5 gap-3">
           <h6 className="">Follow Us :</h6>
-          <i className="fa-brands fa-instagram text-white text-2xl"></i>
-          <i className="fa-brands fa-youtube text-white text-2xl"></i>
-          <i className="fa-brands fa-facebook text-white text-2xl"></i>
-          <i className="fa-brands fa-twitter text-white text-2xl"></i>
+          <i className="fa-brands fa-instagram text-white text-2xl cursor-pointer hover:scale-110 transition-transform"></i>
+          <i className="fa-brands fa-youtube text-white text-2xl cursor-pointer hover:scale-110 transition-transform"></i>
+          <i className="fa-brands fa-facebook text-white text-2xl cursor-pointer hover:scale-110 transition-transform"></i>
+          <i className="fa-brands fa-twitter text-white text-2xl cursor-pointer hover:scale-110 transition-transform"></i>
         </div>
       </div>
       <div className="flex justify-between  p-10">
@@ -47,14 +47,14 @@ function Header() {
           <Link to="/">Home</Link>
           <HeaderCategoryDropdown />
           <Link to="/about">About</Link>
-          <a href="">Blog</a>
+          <Link to="/blog">Blog</Link>
           <Link to="/contact">Contact</Link>
           <a href="">Pages</a>
         </div>
 
-        <div className="flex gap-4 items-center lg:hidden">
+        <div className="flex gap-4 items-center lg:hidden cursor-pointer hover:scale-110 transition-transform">
           <Search size={20} />
-          <div className="relative">
+          <div className="relative cursor-pointer hover:scale-110 transition-transform">
             <ShoppingCart size={20} />
             {totalCount > 0 && (
               <span className="absolute -top-2 -right-3 bg-orange-500 text-white text-[10px] min-w-4 h-4 px-1 rounded-full flex items-center justify-center">
@@ -79,14 +79,14 @@ function Header() {
             </Link>
           )}
 
-          <Search className="cursor-pointer" />
+          <Search className="cursor-pointer hover:scale-110 transition-transform" />
 
           <div
             className="relative"
             onMouseEnter={() => setShowCartDropdown(true)}
             onMouseLeave={() => setShowCartDropdown(false)}
           >
-            <button className="relative cursor-pointer">
+            <button className="relative cursor-pointer hover:scale-110 transition-transform">
               <ShoppingCart />
               {totalCount > 0 && (
                 <span className="absolute -top-2 -right-3 bg-orange-500 text-white text-xs min-w-5 h-5 px-1 rounded-full flex items-center justify-center">
@@ -98,7 +98,7 @@ function Header() {
             {showCartDropdown && <CartDropdown />}
           </div>
 
-          <Heart className="cursor-pointer" />
+          <Heart className="cursor-pointer hover:scale-110 transition-transform" />
         </div>
       </div>
       <div className="grid justify-center lg:hidden gap-3 pt-5 pb-10 text-[#737373] text-lg font-semibold">
