@@ -7,6 +7,7 @@ import {
   SET_CART,
   SET_PAYMENT,
   SET_ADDRESS,
+  RESET_CHECKOUT,
 } from "../actions/shoppingCartActions";
 
 const initialState = {
@@ -65,14 +66,14 @@ function shoppingCartReducer(state = initialState, action) {
       };
 
     case DECREASE_CART_ITEM:
-      return  {
+      return {
         ...state,
         cart: state.cart.map((item) =>
-        item.product.id === action.payload
-        ? { ...item, count: Math.max(1, item.count - 1) }
-        : item
-    ),
-  };
+          item.product.id === action.payload
+            ? { ...item, count: Math.max(1, item.count - 1) }
+            : item
+        ),
+      };
 
     case TOGGLE_CART_ITEM:
       return {
@@ -92,6 +93,9 @@ function shoppingCartReducer(state = initialState, action) {
 
     case SET_ADDRESS:
       return { ...state, address: action.payload };
+
+    case RESET_CHECKOUT:
+      return initialState;
 
     default:
       return state;

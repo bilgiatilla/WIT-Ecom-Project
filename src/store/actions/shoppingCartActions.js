@@ -6,6 +6,7 @@ export const TOGGLE_CART_ITEM = "TOGGLE_CART_ITEM";
 export const SET_CART = "SET_CART";
 export const SET_PAYMENT = "SET_PAYMENT";
 export const SET_ADDRESS = "SET_ADDRESS";
+export const RESET_CHECKOUT = "RESET_CHECKOUT";
 
 export const addToCart = (product) => {
   return {
@@ -60,5 +61,11 @@ export const setAddress = (address) => {
   return {
     type: SET_ADDRESS,
     payload: address,
+  };
+};
+
+export const resetCheckout = () => {
+  return {
+    type: RESET_CHECKOUT,
   };
 };

@@ -1,5 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import {
   addAddress,
   deleteAddress,
@@ -10,28 +12,16 @@ import {
   updateCreditCard,
   deleteCreditCard,
 } from "../store/thunks/clientThunks";
-import cities from "../data/cities.js";
-
-const emptyAddressForm = {
-  title: "",
-  name: "",
-  surname: "",
-  phone: "",
-  city: "",
-  district: "",
-  neighborhood: "",
-};
-
-const emptyCardForm = {
-  card_no: "",
-  expire_month: "",
-  expire_year: "",
-  name_on_card: "",
-  cvv: "",
-};
+import { createOrder } from "../store/thunks/orderThunks";
+import { emptyAddressForm, emptyCardForm } from "../constants/orderForms";
+import OrderStepsHeader from "../components/order/OrderStepsHeader";
+import OrderSummary from "../components/order/OrderSummary";
+import AddressStep from "../components/order/AddressStep";
+import PaymentStep from "../components/order/PaymentStep";
 
 function CreateOrderPage() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const cart = useSelector((state) => state.shoppingCart.cart);
   const addressList = useSelector((state) => state.client.addressList);
@@ -53,6 +43,7 @@ function CreateOrderPage() {
 
   const [selectedCardId, setSelectedCardId] = useState(null);
   const [use3DSecure, setUse3DSecure] = useState(false);
+  const [cardCvv, setCardCvv] = useState("");
 
   const selectedItems = cart.filter((item) => item.checked);
 
@@ -106,6 +97,18 @@ function CreateOrderPage() {
     }));
   };
 
+  const handleCancelAddressForm = () => {
+    setShowAddressForm(false);
+    setEditingAddress(null);
+    setAddressFormData(emptyAddressForm);
+  };
+
+  const handleCancelCardForm = () => {
+    setShowCardForm(false);
+    setEditingCard(null);
+    setCardFormData(emptyCardForm);
+  };
+
   const handleAddNewAddressClick = () => {
     setEditingAddress(null);
     setAddressFormData(emptyAddressForm);
@@ -157,9 +160,7 @@ function CreateOrderPage() {
         await dispatch(addAddress(addressFormData));
       }
 
-      setShowAddressForm(false);
-      setEditingAddress(null);
-      setAddressFormData(emptyAddressForm);
+      handleCancelAddressForm();
     } catch (error) {
       console.error(error);
     }
@@ -217,41 +218,89 @@ function CreateOrderPage() {
         await dispatch(addCreditCard(payload));
       }
 
-      setShowCardForm(false);
-      setEditingCard(null);
-      setCardFormData(emptyCardForm);
+      handleCancelCardForm();
     } catch (error) {
       console.error(error);
     }
   };
 
-  const maskCardNumber = (cardNo) => {
-    if (!cardNo) return "";
-    const clean = String(cardNo).replace(/\s/g, "");
-    if (clean.length < 4) return clean;
-    return `${clean.slice(0, 4)} **** **** ${clean.slice(-4)}`;
-  };
-
   const handleContinue = () => {
-    if (!selectedShippingAddressId) return;
-    setActiveStep(2);
-  };
-
-  const handlePayment = () => {
-    if (!selectedCardId && !showCardForm) {
-      alert("Lütfen bir kart seçin veya yeni kart ekleyin.");
+    if (!selectedShippingAddressId) {
+      toast.error("Lütfen bir teslimat adresi seçin.");
       return;
     }
 
-    console.log("Sipariş hazır:", {
-      shippingAddressId: selectedShippingAddressId,
-      receiptAddressId: selectedReceiptAddressId,
-      selectedCardId,
-      use3DSecure,
-      total: grandTotal,
-    });
+    setActiveStep(2);
+  };
 
-    alert("Şimdilik ödeme submit kısmı hazırlandı. Sipariş endpoint'i gelince bağlanacak.");
+  const handlePayment = async () => {
+    if (!selectedShippingAddressId) {
+      toast.error("Lütfen bir teslimat adresi seçin.");
+      return;
+    }
+
+    if (!selectedCardId && !showCardForm) {
+      toast.error("Lütfen bir kart seçin veya yeni kart ekleyin.");
+      return;
+    }
+
+    if (!selectedItems.length) {
+      toast.error("Sipariş vermek için sepette en az bir ürün seçmelisiniz.");
+      return;
+    }
+
+    const selectedCard = creditCards.find((card) => card.id === selectedCardId);
+
+    if (!selectedCard) {
+      toast.error("Seçili kart bulunamadı.");
+      return;
+    }
+
+    if (!cardCvv.trim()) {
+      toast.error("Lütfen CVV bilgisini girin.");
+      return;
+    }
+
+    const orderPayload = {
+      address_id: selectedShippingAddressId,
+      order_date: new Date().toISOString(),
+      card_no: Number(String(selectedCard.card_no).replace(/\s/g, "")),
+      card_name: selectedCard.name_on_card,
+      card_expire_month: Number(selectedCard.expire_month),
+      card_expire_year: Number(selectedCard.expire_year),
+      card_ccv: Number(cardCvv),
+      price: Number(grandTotal.toFixed(2)),
+      products: selectedItems.map((item) => ({
+        product_id: item.product.id,
+        count: item.count,
+        detail: item.detail || "standart",
+      })),
+    };
+
+    try {
+      await dispatch(createOrder(orderPayload));
+
+      toast.success("Tebrikler! Siparişiniz başarıyla oluşturuldu.");
+
+      setSelectedShippingAddressId(null);
+      setSelectedReceiptAddressId(null);
+      setSelectedCardId(null);
+      setCardCvv("");
+      setActiveStep(1);
+      setUseSameAddress(true);
+      setUse3DSecure(false);
+      setShowAddressForm(false);
+      setShowCardForm(false);
+      setEditingAddress(null);
+      setEditingCard(null);
+      setAddressFormData(emptyAddressForm);
+      setCardFormData(emptyCardForm);
+
+      navigate("/");
+    } catch (error) {
+      console.error(error);
+      toast.error("Sipariş oluşturulamadı. Lütfen tekrar deneyin.");
+    }
   };
 
   return (
@@ -259,502 +308,62 @@ function CreateOrderPage() {
       <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-6 items-start">
         <div className="w-full lg:flex-1">
           <div className="bg-white border rounded-xl p-5">
-            <div className="grid grid-cols-1 md:grid-cols-2 border-b mb-6">
-              <div className={`pb-4 ${activeStep === 1 ? "border-b-4 border-orange-500" : ""}`}>
-                <h2 className={`text-2xl font-bold ${activeStep === 1 ? "text-[#F28D35]" : "text-gray-500"}`}>
-                  1. Adres Bilgileri
-                </h2>
-                <p className="text-sm text-gray-500 mt-2">
-                  Teslimat ve fatura adresini seçin ya da yeni adres ekleyin.
-                </p>
-              </div>
-
-              <div className={`pb-4 pt-4 md:pt-0 md:pl-6 ${activeStep === 2 ? "border-b-4 border-orange-500" : ""}`}>
-                <h2 className={`text-2xl font-bold ${activeStep === 2 ? "text-[#F28D35]" : "text-gray-500"}`}>
-                  2. Ödeme Seçenekleri
-                </h2>
-                <p className="text-sm text-gray-500 mt-2">
-                  Kayıtlı kartını seç veya yeni kart ekle.
-                </p>
-              </div>
-            </div>
+            <OrderStepsHeader activeStep={activeStep} />
 
             {activeStep === 1 && (
-              <div className="mb-8">
-                <div className="flex items-center justify-between gap-4 mb-4">
-                  <h3 className="text-xl font-bold">Teslimat Adresi</h3>
-                  <button
-                    onClick={handleAddNewAddressClick}
-                    className="bg-[#F28D35] text-white px-4 py-2 rounded-md font-semibold cursor-pointer"
-                  >
-                    Add Address
-                  </button>
-                </div>
-
-                {showAddressForm && (
-                  <form
-                    onSubmit={handleAddressSubmit}
-                    className="border rounded-xl p-4 mb-6 grid grid-cols-1 md:grid-cols-2 gap-4 bg-[#FFFDF8]"
-                  >
-                    <input
-                      name="title"
-                      value={addressFormData.title}
-                      onChange={handleAddressChange}
-                      placeholder="Address Title"
-                      className="border rounded-md p-3"
-                      required
-                    />
-                    <input
-                      name="name"
-                      value={addressFormData.name}
-                      onChange={handleAddressChange}
-                      placeholder="Name"
-                      className="border rounded-md p-3"
-                      required
-                    />
-                    <input
-                      name="surname"
-                      value={addressFormData.surname}
-                      onChange={handleAddressChange}
-                      placeholder="Surname"
-                      className="border rounded-md p-3"
-                      required
-                    />
-                    <input
-                      name="phone"
-                      value={addressFormData.phone}
-                      onChange={handleAddressChange}
-                      placeholder="Phone"
-                      className="border rounded-md p-3"
-                      required
-                    />
-                    <select
-                      name="city"
-                      value={addressFormData.city}
-                      onChange={handleAddressChange}
-                      className="border rounded-md p-3 bg-white text-black"
-                    >
-                      <option value="">Şehir Seç</option>
-                      {cities.map((city) => (
-                        <option key={city.value} value={city.value}>
-                          {city.label}
-                        </option>
-                      ))}
-                    </select>
-                    <input
-                      name="district"
-                      value={addressFormData.district}
-                      onChange={handleAddressChange}
-                      placeholder="District"
-                      className="border rounded-md p-3"
-                      required
-                    />
-                    <textarea
-                      name="neighborhood"
-                      value={addressFormData.neighborhood}
-                      onChange={handleAddressChange}
-                      placeholder="Neighborhood / Address details"
-                      className="border rounded-md p-3 md:col-span-2 min-h-28"
-                      required
-                    />
-
-                    <div className="md:col-span-2 flex gap-3">
-                      <button
-                        type="submit"
-                        className="bg-[#F28D35] text-white px-5 py-3 rounded-md font-semibold cursor-pointer"
-                      >
-                        {editingAddress ? "Update Address" : "Save Address"}
-                      </button>
-
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setShowAddressForm(false);
-                          setEditingAddress(null);
-                          setAddressFormData(emptyAddressForm);
-                        }}
-                        className="border px-5 py-3 rounded-md font-semibold cursor-pointer"
-                      >
-                        Cancel
-                      </button>
-                    </div>
-                  </form>
-                )}
-
-                <div className="flex items-center gap-3 mb-4">
-                  <input
-                    type="checkbox"
-                    checked={useSameAddress}
-                    onChange={(e) => setUseSameAddress(e.target.checked)}
-                    className="w-4 h-4 accent-orange-500"
-                  />
-                  <span className="text-sm text-gray-600">
-                    Faturamı aynı adrese gönder
-                  </span>
-                </div>
-
-                {addressList.length === 0 ? (
-                  <div className="text-gray-500 border rounded-xl p-6">
-                    Kayıtlı adres bulunamadı.
-                  </div>
-                ) : (
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {addressList.map((address) => (
-                      <div
-                        key={address.id}
-                        className={`border rounded-xl p-4 ${
-                          selectedShippingAddressId === address.id
-                            ? "border-orange-500 ring-1 ring-orange-300"
-                            : "border-gray-200"
-                        }`}
-                      >
-                        <div className="flex items-start justify-between gap-3 mb-3">
-                          <label className="flex items-center gap-2 font-semibold">
-                            <input
-                              type="radio"
-                              name="shippingAddress"
-                              checked={selectedShippingAddressId === address.id}
-                              onChange={() => setSelectedShippingAddressId(address.id)}
-                              className="accent-orange-500"
-                            />
-                            {address.title}
-                          </label>
-
-                          <div className="flex gap-3 text-sm">
-                            <button
-                              onClick={() => handleEditAddress(address)}
-                              className="text-blue-600 cursor-pointer"
-                            >
-                              Düzenle
-                            </button>
-                            <button
-                              onClick={() => handleDeleteAddress(address.id)}
-                              className="text-red-500 cursor-pointer"
-                            >
-                              Sil
-                            </button>
-                          </div>
-                        </div>
-
-                        <div className="text-sm text-gray-700 space-y-1">
-                          <p>{address.name} {address.surname}</p>
-                          <p>{address.phone}</p>
-                          <p>{address.district} / {address.city}</p>
-                          <p>{address.neighborhood}</p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                )}
-
-                {!useSameAddress && (
-                  <div className="mt-8">
-                    <h3 className="text-xl font-bold mb-4">Fatura Adresi</h3>
-
-                    {addressList.length === 0 ? (
-                      <div className="text-gray-500 border rounded-xl p-6">
-                        Kayıtlı adres bulunamadı.
-                      </div>
-                    ) : (
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        {addressList.map((address) => (
-                          <div
-                            key={address.id}
-                            className={`border rounded-xl p-4 ${
-                              selectedReceiptAddressId === address.id
-                                ? "border-orange-500 ring-1 ring-orange-300"
-                                : "border-gray-200"
-                            }`}
-                          >
-                            <label className="flex items-center gap-2 font-semibold mb-3">
-                              <input
-                                type="radio"
-                                name="receiptAddress"
-                                checked={selectedReceiptAddressId === address.id}
-                                onChange={() => setSelectedReceiptAddressId(address.id)}
-                                className="accent-orange-500"
-                              />
-                              {address.title}
-                            </label>
-
-                            <div className="text-sm text-gray-700 space-y-1">
-                              <p>{address.name} {address.surname}</p>
-                              <p>{address.phone}</p>
-                              <p>{address.district} / {address.city}</p>
-                              <p>{address.neighborhood}</p>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                )}
-              </div>
+              <AddressStep
+                addressList={addressList}
+                showAddressForm={showAddressForm}
+                editingAddress={editingAddress}
+                addressFormData={addressFormData}
+                selectedShippingAddressId={selectedShippingAddressId}
+                selectedReceiptAddressId={selectedReceiptAddressId}
+                useSameAddress={useSameAddress}
+                onAddressChange={handleAddressChange}
+                onAddNewAddress={handleAddNewAddressClick}
+                onEditAddress={handleEditAddress}
+                onDeleteAddress={handleDeleteAddress}
+                onAddressSubmit={handleAddressSubmit}
+                onCancelAddressForm={handleCancelAddressForm}
+                onToggleSameAddress={setUseSameAddress}
+                onSelectShippingAddress={setSelectedShippingAddressId}
+                onSelectReceiptAddress={setSelectedReceiptAddressId}
+              />
             )}
 
             {activeStep === 2 && (
-              <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
-                <div className="border rounded-xl p-4">
-                  <div className="flex items-center justify-between mb-4 gap-4">
-                    <h3 className="text-2xl font-bold">Kart Bilgileri</h3>
-                    <button
-                      onClick={handleAddNewCardClick}
-                      className="text-gray-600 underline font-medium cursor-pointer"
-                    >
-                      Başka bir Kart ile Ödeme Yap
-                    </button>
-                  </div>
-
-                  {creditCards.length > 0 && (
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                      {creditCards.map((card) => (
-                        <div
-                          key={card.id}
-                          className={`border rounded-xl p-4 ${
-                            selectedCardId === card.id
-                              ? "border-orange-500 ring-1 ring-orange-300"
-                              : "border-gray-200"
-                          }`}
-                        >
-                          <div className="flex items-center justify-between mb-3">
-                            <label className="flex items-center gap-2 font-semibold">
-                              <input
-                                type="radio"
-                                name="selectedCard"
-                                checked={selectedCardId === card.id}
-                                onChange={() => setSelectedCardId(card.id)}
-                                className="accent-orange-500"
-                              />
-                              {card.name_on_card}
-                            </label>
-                          </div>
-
-                          <div className="space-y-1 text-sm text-gray-700">
-                            <p>{maskCardNumber(card.card_no)}</p>
-                            <p>
-                              {card.expire_month}/{card.expire_year}
-                            </p>
-                          </div>
-
-                          <div className="flex gap-3 text-sm mt-4">
-                            <button
-                              onClick={() => handleEditCard(card)}
-                              className="text-blue-600 cursor-pointer"
-                            >
-                              Düzenle
-                            </button>
-                            <button
-                              onClick={() => handleDeleteCard(card.id)}
-                              className="text-red-500 cursor-pointer"
-                            >
-                              Sil
-                            </button>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-
-                  {showCardForm && (
-                    <form
-                      onSubmit={handleCardSubmit}
-                      className="border rounded-xl p-4 bg-[#FFFDF8] grid grid-cols-1 md:grid-cols-2 gap-4"
-                    >
-                      <input
-                        name="card_no"
-                        value={cardFormData.card_no}
-                        onChange={handleCardChange}
-                        placeholder="Kart Numarası"
-                        className="border rounded-md p-3 md:col-span-2"
-                        maxLength={19}
-                        required
-                      />
-
-                      <select
-                        name="expire_month"
-                        value={cardFormData.expire_month}
-                        onChange={handleCardChange}
-                        className="border rounded-md p-3 bg-white"
-                        required
-                      >
-                        <option value="">Ay</option>
-                        {Array.from({ length: 12 }, (_, i) => i + 1).map((month) => (
-                          <option key={month} value={month}>
-                            {month}
-                          </option>
-                        ))}
-                      </select>
-
-                      <select
-                        name="expire_year"
-                        value={cardFormData.expire_year}
-                        onChange={handleCardChange}
-                        className="border rounded-md p-3 bg-white"
-                        required
-                      >
-                        <option value="">Yıl</option>
-                        {Array.from({ length: 12 }, (_, i) => 2025 + i).map((year) => (
-                          <option key={year} value={year}>
-                            {year}
-                          </option>
-                        ))}
-                      </select>
-
-                      <input
-                        name="name_on_card"
-                        value={cardFormData.name_on_card}
-                        onChange={handleCardChange}
-                        placeholder="Kart Üzerindeki İsim"
-                        className="border rounded-md p-3"
-                        required
-                      />
-
-                      <input
-                        name="cvv"
-                        value={cardFormData.cvv}
-                        onChange={handleCardChange}
-                        placeholder="CVV"
-                        className="border rounded-md p-3"
-                        maxLength={4}
-                        required
-                      />
-
-                      <div className="md:col-span-2 flex items-center gap-3">
-                        <input
-                          type="checkbox"
-                          checked={use3DSecure}
-                          onChange={(e) => setUse3DSecure(e.target.checked)}
-                          className="w-4 h-4 accent-orange-500"
-                        />
-                        <span className="font-medium">3D Secure ile ödemek istiyorum</span>
-                      </div>
-
-                      <div className="md:col-span-2 flex gap-3">
-                        <button
-                          type="submit"
-                          className="bg-[#F28D35] text-white px-5 py-3 rounded-md font-semibold cursor-pointer"
-                        >
-                          {editingCard ? "Update Card" : "Save Card"}
-                        </button>
-
-                        <button
-                          type="button"
-                          onClick={() => {
-                            setShowCardForm(false);
-                            setEditingCard(null);
-                            setCardFormData(emptyCardForm);
-                          }}
-                          className="border px-5 py-3 rounded-md font-semibold cursor-pointer"
-                        >
-                          Cancel
-                        </button>
-                      </div>
-                    </form>
-                  )}
-
-                  {!showCardForm && (
-                    <div className="mt-4 flex items-center gap-3">
-                      <input
-                        type="checkbox"
-                        checked={use3DSecure}
-                        onChange={(e) => setUse3DSecure(e.target.checked)}
-                        className="w-4 h-4 accent-orange-500"
-                      />
-                      <span className="font-medium">3D Secure ile ödemek istiyorum</span>
-                    </div>
-                  )}
-                </div>
-
-                <div className="border rounded-xl p-4">
-                  <h3 className="text-2xl font-bold mb-2">Taksit Seçenekleri</h3>
-                  <p className="text-gray-600 mb-4">
-                    Endpoint verilmediği için şimdilik tek çekim gösteriliyor.
-                  </p>
-
-                  <div className="border rounded-lg overflow-hidden">
-                    <div className="grid grid-cols-2 bg-gray-50 border-b">
-                      <div className="p-4 font-semibold">Taksit Sayısı</div>
-                      <div className="p-4 font-semibold">Aylık Ödeme</div>
-                    </div>
-
-                    <div className="grid grid-cols-2">
-                      <div className="p-4 text-[#F28D35] font-semibold">Tek Çekim</div>
-                      <div className="p-4 text-[#F28D35] font-semibold">
-                        ₺{grandTotal.toFixed(2)}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <PaymentStep
+                creditCards={creditCards}
+                selectedCardId={selectedCardId}
+                showCardForm={showCardForm}
+                editingCard={editingCard}
+                cardFormData={cardFormData}
+                cardCvv={cardCvv}
+                use3DSecure={use3DSecure}
+                grandTotal={grandTotal}
+                onAddNewCard={handleAddNewCardClick}
+                onEditCard={handleEditCard}
+                onDeleteCard={handleDeleteCard}
+                onCardChange={handleCardChange}
+                onCardSubmit={handleCardSubmit}
+                onCancelCardForm={handleCancelCardForm}
+                onSelectCard={setSelectedCardId}
+                onCardCvvChange={setCardCvv}
+                onToggle3DSecure={setUse3DSecure}
+              />
             )}
           </div>
         </div>
 
-        <div className="w-full lg:w-90 lg:sticky lg:top-6">
-          {activeStep === 1 ? (
-            <button
-              onClick={handleContinue}
-              className="w-full bg-[#F28D35] text-white font-bold rounded-lg py-4 cursor-pointer"
-            >
-              Kaydet ve Devam Et
-            </button>
-          ) : (
-            <button
-              onClick={handlePayment}
-              className="w-full bg-[#F28D35] text-white font-bold rounded-lg py-4 cursor-pointer"
-            >
-              Ödeme Yap
-            </button>
-          )}
-
-          <div className="bg-white rounded-xl border p-6 mt-4 shadow-sm">
-            <h2 className="text-3xl font-light mb-6">Sipariş Özeti</h2>
-
-            <div className="space-y-3 text-lg">
-              <div className="flex justify-between gap-4">
-                <span className="text-gray-600">Ürünlerin Toplamı</span>
-                <span className="font-semibold">₺{productsTotal.toFixed(2)}</span>
-              </div>
-
-              <div className="flex justify-between gap-4">
-                <span className="text-gray-600">Kargo Toplam</span>
-                <span className="font-semibold">₺{shippingTotal.toFixed(2)}</span>
-              </div>
-
-              <div className="flex justify-between gap-4">
-                <span className="text-gray-600">150 TL ve Üzeri Kargo Bedava</span>
-                <span className="font-semibold text-[#F28D35]">
-                  -₺{discount.toFixed(2)}
-                </span>
-              </div>
-            </div>
-
-            <div className="border-t my-5"></div>
-
-            <div className="flex justify-between items-center">
-              <span className="text-2xl text-gray-700">Toplam</span>
-              <span className="text-3xl font-bold text-[#F28D35]">
-                ₺{grandTotal.toFixed(2)}
-              </span>
-            </div>
-          </div>
-
-          {activeStep === 1 ? (
-            <button
-              onClick={handleContinue}
-              className="w-full mt-4 bg-[#F28D35] text-white font-bold rounded-lg py-4 cursor-pointer"
-            >
-              Kaydet ve Devam Et
-            </button>
-          ) : (
-            <button
-              onClick={handlePayment}
-              className="w-full mt-4 bg-[#F28D35] text-white font-bold rounded-lg py-4 cursor-pointer"
-            >
-              Ödeme Yap
-            </button>
-          )}
-        </div>
+        <OrderSummary
+          activeStep={activeStep}
+          productsTotal={productsTotal}
+          shippingTotal={shippingTotal}
+          discount={discount}
+          grandTotal={grandTotal}
+          onContinue={handleContinue}
+          onPayment={handlePayment}
+        />
       </div>
     </div>
   );
