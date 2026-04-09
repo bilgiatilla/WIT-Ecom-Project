@@ -1,5 +1,5 @@
 import api from "../../api/axios";
-import { setCategories, setProductList, setTotal, setFetchState } from "../actions/productActions";
+import { setCategories, setProductList, setTotal, setFetchState, setProductDetail, } from "../actions/productActions";
 
 export const fetchCategories = () => {
   return async (dispatch, getState) => {
@@ -16,10 +16,11 @@ export const fetchCategories = () => {
   };
 };
 
-export const fetchProducts = ({ categoryId = "", sort = "", filter = "" } = {}) => {
+export const fetchProducts = ({ categoryId = "", sort = "", filter = "", limit = 25, offset = 0 } = {}) => {
   return async (dispatch) => {
     try {
       dispatch(setFetchState("FETCHING"));
+
       const params = new URLSearchParams();
 
       if (categoryId) {
@@ -33,10 +34,11 @@ export const fetchProducts = ({ categoryId = "", sort = "", filter = "" } = {}) 
       if (sort) {
         params.append("sort", sort);
       }
+      params.append("limit", limit);
+      params.append("offset", offset);
 
-      
       const queryString = params.toString();
-      const url = queryString ? `/products?${queryString}` : "/products";
+      const url = `/products?${queryString}`;
 
       const response = await api.get(url);
 
@@ -45,6 +47,23 @@ export const fetchProducts = ({ categoryId = "", sort = "", filter = "" } = {}) 
       dispatch(setFetchState("FETCHED"));
     } catch (error) {
       console.error("Products fetch error:", error);
+      dispatch(setFetchState("FAILED"));
+    }
+  };
+};
+
+export const fetchProductDetail = (productId) => {
+  return async (dispatch) => {
+    try {
+      dispatch(setFetchState("FETCHING"));
+      dispatch(setProductDetail(null));
+
+      const response = await api.get(`/products/${productId}`);
+
+      dispatch(setProductDetail(response.data));
+      dispatch(setFetchState("FETCHED"));
+    } catch (error) {
+      console.error("Product detail fetch error:", error);
       dispatch(setFetchState("FAILED"));
     }
   };

@@ -1,14 +1,22 @@
-import { ChevronDown, LayoutGrid, ListChecks } from "lucide-react";
+import { LayoutGrid, ListChecks } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
 import Pagination from "../../Components/Pagination.jsx";
 import BrandLogos from "../../Components/Services.jsx";
 import { fetchProducts } from "../../store/thunks/productThunks";
+import slugify from "../../utils/slugify";
 
 function ShopProducts({ categoryId }) {
   const [currentPage, setCurrentPage] = useState(1);
   const [sort, setSort] = useState("");
   const [filter, setFilter] = useState("");
+
+  const navigate = useNavigate();
+  const params = useParams();
+
+  const gender = params.gender || "erkek";
+  const categoryName = params.categoryName || "kategori";
 
   const dispatch = useDispatch();
 
@@ -16,13 +24,24 @@ function ShopProducts({ categoryId }) {
   const total = useSelector((state) => state.product.total);
   const fetchState = useSelector((state) => state.product.fetchState);
 
+  const limit = 25;
+  const totalPages = Math.ceil(total / limit);
+
+  const startItem = (currentPage - 1) * limit + 1;
+  const endItem = Math.min(currentPage * limit, total);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [categoryId, sort, filter]);
+
   useEffect(() => {
   const timeout = setTimeout(() => {
-    dispatch(fetchProducts({ categoryId, sort, filter }));
+    const offset = (currentPage - 1) * limit;
+    dispatch(fetchProducts({ categoryId, sort, filter, limit, offset }));
   }, 500);
 
   return () => clearTimeout(timeout);
-}, [categoryId, sort, filter]);
+}, [dispatch, categoryId, sort, filter, currentPage]);
 
   if (fetchState === "FETCHING") {
     return (
@@ -44,7 +63,7 @@ function ShopProducts({ categoryId }) {
     <div className="pt-10 flex flex-col gap-5">
       <div className="flex flex-col lg:flex-row justify-between px-10 gap-3">
         <h6 className="text-[#737373] font-bold text-lg">
-          Showing {total} results
+          Showing {startItem}-{endItem} of {total} results
         </h6>
         <div className="flex flex-row justify-center gap-3 font-bold">
           <h6 className="text-[#737373] p-3">Views:</h6>
@@ -80,37 +99,42 @@ function ShopProducts({ categoryId }) {
       <section className="px-10 lg:px-40 justify-center">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {productList.map((product) => (
-            <div
-              key={product.id}
-              className="text-center grid gap-2 py-5 justify-center"
-            >
-              <img
-                src={product.images?.[0]?.url}
-                alt={product.name}
-                className="w-full h-72 object-cover"
-              />
+  <div
+    key={product.id}
+    onClick={() =>
+      navigate(
+        `/shop/${gender}/${categoryName}/${categoryId}/${slugify(product.name)}/${product.id}`
+      )
+    }
+    className="text-center grid gap-2 py-5 justify-center cursor-pointer transition duration-300 hover:shadow-lg hover:scale-[1.02]"
+  >
+    <img
+      src={product.images?.[0]?.url}
+      alt={product.name}
+      className="w-full h-72 object-cover"
+    />
 
-              <h3 className="font-bold">{product.name}</h3>
-              <p className="text-[#737373] font-bold">{product.description}</p>
-              <p className="font-bold">
-                <span className="text-[#23856D]">₺{product.price}</span>
-              </p>
+    <h3 className="font-bold">{product.name}</h3>
+    <p className="text-[#737373] font-bold">{product.description}</p>
+    <p className="font-bold">
+      <span className="text-[#23856D]">₺{product.price}</span>
+    </p>
 
-              <div className="flex gap-2 mt-2 justify-center">
-                <span className="w-4 h-4 rounded-full bg-blue-500"></span>
-                <span className="w-4 h-4 rounded-full bg-green-700"></span>
-                <span className="w-4 h-4 rounded-full bg-orange-400"></span>
-                <span className="w-4 h-4 rounded-full bg-gray-800"></span>
-              </div>
-            </div>
-          ))}
+    <div className="flex gap-2 mt-2 justify-center">
+      <span className="w-4 h-4 rounded-full bg-blue-500"></span>
+      <span className="w-4 h-4 rounded-full bg-green-700"></span>
+      <span className="w-4 h-4 rounded-full bg-orange-400"></span>
+      <span className="w-4 h-4 rounded-full bg-gray-800"></span>
+    </div>
+  </div>
+))}
         </div>
       </section>
 
       <div className="py-10 flex justify-center">
         <Pagination
           currentPage={currentPage}
-          totalPages={4}
+          totalPages={totalPages}
           onPageChange={setCurrentPage}
           className=""
         />

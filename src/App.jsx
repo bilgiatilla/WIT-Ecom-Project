@@ -1,9 +1,9 @@
-import { Route, Routes } from "react-router-dom"
-import Footer from './Layouts/Footer'
-import Header from "./Layouts/Header"
-import PageContent from './Layouts/PageContent'
+import { Route, Routes } from "react-router-dom";
+import Footer from "./Layouts/Footer";
+import Header from "./Layouts/Header";
+import PageContent from "./Layouts/PageContent";
 import HomePage from "./Pages/Homepage";
-import ProductPage from './Pages/ProductPage';
+import ProductPage from "./Pages/ProductPage";
 import ShopPage from "./Pages/ShopPage";
 import ContactPage from "./Pages/Contact.Page";
 import TeamPage from "./Pages/TeamPage";
@@ -28,20 +28,28 @@ function App() {
       <PageContent>
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/product/" element={<ProductPage />} />
           <Route path="/product/:id" element={<ProductPage />} />
           <Route path="/shop" element={<ShopPage />} />
-          <Route path="/shop/:gender/:categoryName/:categoryId" element={<ShopPage />} />
-          <Route path="/contact" element={<ContactPage />}/>
-          <Route path="/team" element={<TeamPage />}/>
-          <Route path="/about" element={<AboutPage />}/>
+          <Route
+            path="/shop/:gender/:categoryName/:categoryId"
+            element={<ShopPage />}
+          />
+          <Route
+            path="/shop/:gender/:categoryName/:categoryId/:productNameSlug/:productId"
+            element={<ProductPage />}
+          />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/team" element={<TeamPage />} />
+          <Route path="/about" element={<AboutPage />} />
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/login" element={<LoginPage />} />
         </Routes>
         <ToastContainer />
       </PageContent>
-      <Footer/>
+      <Footer />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

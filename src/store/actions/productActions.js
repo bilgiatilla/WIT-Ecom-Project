@@ -5,6 +5,7 @@ export const SET_FETCH_STATE = "SET_FETCH_STATE";
 export const SET_LIMIT = "SET_LIMIT";
 export const SET_OFFSET = "SET_OFFSET";
 export const SET_FILTER = "SET_FILTER";
+export const SET_PRODUCT_DETAIL = "SET_PRODUCT_DETAIL";
 
 
 export const setCategories = (categories) => {
@@ -56,3 +57,9 @@ export const setFilter = (filter) => {
   };
 };
 
+export const setProductDetail = (productDetail) => {
+  return {
+    type: SET_PRODUCT_DETAIL,
+    payload: productDetail,
+  };
+};

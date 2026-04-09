@@ -6,6 +6,7 @@ import {
   SET_LIMIT,
   SET_OFFSET,
   SET_FILTER,
+  SET_PRODUCT_DETAIL,
 } from "../actions/productActions";
 
 
@@ -37,6 +38,8 @@ function productReducer(state = initialState, action) {
       return { ...state, filter: action.payload };
     case SET_FETCH_STATE:
       return { ...state, fetchState: action.payload };
+    case SET_PRODUCT_DETAIL:
+      return { ...state, productDetail: action.payload };  
     default:
       return state;
   }
