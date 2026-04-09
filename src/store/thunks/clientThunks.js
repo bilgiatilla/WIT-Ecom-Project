@@ -1,5 +1,5 @@
 import api from "../../api/axios";
-import { clearUser, setRoles, setUser } from "../actions/clientActions";
+import { clearUser, setRoles, setUser, setAddressList, setCreditCards } from "../actions/clientActions";
 
 
 export const fetchRolesIfNeeded = () => {
@@ -74,6 +74,100 @@ export const verifyToken = () => {
       localStorage.removeItem("token");
       delete api.defaults.headers.common["Authorization"];
       dispatch(clearUser());
+    }
+  };
+};
+export const fetchAddresses = () => {
+  return async (dispatch) => {
+    try {
+      const res = await api.get("/user/address");
+      dispatch(setAddressList(res.data));
+    } catch (error) {
+      console.error("Adresler alınamadı:", error);
+      throw error;
+    }
+  };
+};
+
+export const addAddress = (addressData) => {
+  return async (dispatch) => {
+    try {
+      await api.post("/user/address", addressData);
+      dispatch(fetchAddresses());
+    } catch (error) {
+      console.error("Adres eklenemedi:", error);
+      throw error;
+    }
+  };
+};
+
+export const updateAddress = (addressData) => {
+  return async (dispatch) => {
+    try {
+      await api.put("/user/address", addressData);
+      dispatch(fetchAddresses());
+    } catch (error) {
+      console.error("Adres güncellenemedi:", error);
+      throw error;
+    }
+  };
+};
+
+export const deleteAddress = (addressId) => {
+  return async (dispatch) => {
+    try {
+      await api.delete(`/user/address/${addressId}`);
+      dispatch(fetchAddresses());
+    } catch (error) {
+      console.error("Adres silinemedi:", error);
+      throw error;
+    }
+  };
+};
+export const fetchCreditCards = () => {
+  return async (dispatch) => {
+    try {
+      const res = await api.get("/user/card");
+      dispatch(setCreditCards(res.data));
+    } catch (error) {
+      console.error("Kartlar alınamadı:", error);
+      throw error;
+    }
+  };
+};
+
+export const addCreditCard = (cardData) => {
+  return async (dispatch) => {
+    try {
+      await api.post("/user/card", cardData);
+      dispatch(fetchCreditCards());
+    } catch (error) {
+      console.error("Kart eklenemedi:", error);
+      throw error;
+    }
+  };
+};
+
+export const updateCreditCard = (cardData) => {
+  return async (dispatch) => {
+    try {
+      await api.put("/user/card", cardData);
+      dispatch(fetchCreditCards());
+    } catch (error) {
+      console.error("Kart güncellenemedi:", error);
+      throw error;
+    }
+  };
+};
+
+export const deleteCreditCard = (cardId) => {
+  return async (dispatch) => {
+    try {
+      await api.delete(`/user/card/${cardId}`);
+      dispatch(fetchCreditCards());
+    } catch (error) {
+      console.error("Kart silinemedi:", error);
+      throw error;
     }
   };
 };

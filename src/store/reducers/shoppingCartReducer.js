@@ -65,16 +65,14 @@ function shoppingCartReducer(state = initialState, action) {
       };
 
     case DECREASE_CART_ITEM:
-      return {
+      return  {
         ...state,
-        cart: state.cart
-          .map((item) =>
-            item.product.id === action.payload
-              ? { ...item, count: item.count - 1 }
-              : item
-          )
-          .filter((item) => item.count > 0),
-      };
+        cart: state.cart.map((item) =>
+        item.product.id === action.payload
+        ? { ...item, count: Math.max(1, item.count - 1) }
+        : item
+    ),
+  };
 
     case TOGGLE_CART_ITEM:
       return {

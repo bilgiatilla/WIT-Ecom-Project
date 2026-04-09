@@ -9,6 +9,9 @@ import {
 function CartDropdown() {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.shoppingCart.cart);
+  const totalAmount = cart
+    .filter((item) => item.checked)
+    .reduce((sum, item) => sum + item.product.price * item.count, 0);
 
   return (
     <div className="absolute right-0 top-full w-90 bg-white border rounded-lg shadow-lg z-50">
@@ -76,6 +79,12 @@ function CartDropdown() {
           </div>
 
           <div className="p-4 flex gap-3">
+            <div className="p-4 border-t">
+              <div className="flex justify-between font-bold">
+                <span>Toplam</span>
+                <span>₺{totalAmount.toFixed(2)}</span>
+              </div>
+            </div>
             <Link
               to="/cart"
               className="flex-1 border rounded-md py-2 text-center font-medium hover:bg-gray-50 transition"
@@ -84,7 +93,7 @@ function CartDropdown() {
             </Link>
 
             <Link
-              to="/checkout"
+              disabled
               className="flex-1 bg-[#F28D35] text-white rounded-md py-2 text-center font-bold hover:opacity-90 transition"
             >
               Siparişi Tamamla

@@ -10,13 +10,13 @@ const initialState = {
 function clientReducer(state = initialState, action) {
   switch (action.type) {
     case "SET_USER":
-      return { ...state, user: {} };
+      return { ...state, user: action.payload };
      case "CLEAR_USER":
       return { ...state, user: {} };
     case "SET_ADDRESS_LIST":
       return { ...state, addressList: action.payload }
     case "SET_CREDIT_CARDS":
-      return { ...state, credirCards: action.payload }
+      return { ...state, creditCards: action.payload }
     case "SET_ROLES":
       return { ...state, roles: action.payload };
     case "SET_THEME":

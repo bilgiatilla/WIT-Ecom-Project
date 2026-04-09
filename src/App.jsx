@@ -15,6 +15,9 @@ import LoginPage from "./Pages/LoginPage";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { verifyToken } from "./store/thunks/clientThunks";
+import ShoppingCartPage from "./Pages/ShoppingCartPage";
+import ProtectedRoute from "./Components/ProtectedRoute";
+import CreateOrderPage from "./Pages/CreateOrderPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -39,11 +42,20 @@ function App() {
             path="/shop/:gender/:categoryName/:categoryId/:productNameSlug/:productId"
             element={<ProductPage />}
           />
+          <Route path="/cart" element={<ShoppingCartPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/team" element={<TeamPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route
+            path="/create-order"
+            element={
+              <ProtectedRoute>
+                <CreateOrderPage />
+              </ProtectedRoute>
+            }
+          />
         </Routes>
         <ToastContainer />
       </PageContent>
