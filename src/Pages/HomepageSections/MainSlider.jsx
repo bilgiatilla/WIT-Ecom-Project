@@ -4,6 +4,7 @@ import heroSlide from "../../assets/hero-slide.jpg";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import { Link } from "react-router-dom";
 
 function MainSlider() {
   return (
@@ -28,7 +29,7 @@ function MainSlider() {
           We know how large objects will act, <br></br>but things on a small scale.
         </h4>
         <div className="font-bold">
-        <button className="border bg-[#2DC071] border-[#2DC071] px-5 py-2">SHOP NOW</button>
+        <Link to="/shop" className="border bg-[#2DC071] border-[#2DC071] px-5 py-2 cursor-pointer">SHOP NOW</Link>
         </div>
         </div>
       </div>
@@ -43,7 +44,7 @@ function MainSlider() {
           We know how large objects will act, <br></br>but things on a small scale.
         </h4>
         <div className="font-bold">
-        <button className="border bg-[#2DC071] border-[#2DC071] px-5 py-2">SHOP NOW</button>
+        <Link to="/shop" className="border bg-[#2DC071] border-[#2DC071] px-5 py-2 cursor-pointer">SHOP NOW</Link>
         </div>
         </div>
       </div>

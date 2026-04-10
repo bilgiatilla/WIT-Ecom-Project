@@ -26,14 +26,14 @@ function Pagination({ currentPage, totalPages, onPageChange }) {
       <button
         onClick={() => onPageChange(1)}
         disabled={currentPage === 1}
-        className="px-4 py-2 text-sm bg-gray-100 text-gray-400 disabled:cursor-not-allowed"
+        className="px-4 py-2 text-sm bg-gray-100 text-gray-400 disabled:cursor-not-allowed cursor-pointer"
       >
         First
       </button>
       <button
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
-        className="px-4 py-2 text-sm border-l border-gray-300 bg-white text-sky-500 disabled:text-gray-400 disabled:cursor-not-allowed"
+        className="px-4 py-2 text-sm border-l border-gray-300 bg-white text-sky-500 disabled:text-gray-400 disabled:cursor-not-allowed cursor-pointer"
       >
         Prev
       </button>
@@ -41,7 +41,7 @@ function Pagination({ currentPage, totalPages, onPageChange }) {
       {visiblePages.map((page, index) => 
         page === "..." ? ( <span
             key={`dots-${index}`}
-            className="px-4 py-2 text-sm border-l border-gray-300 bg-white text-gray-400"
+            className="px-4 py-2 text-sm border-l border-gray-300 bg-white text-gray-400 cursor-pointer"
           >
             ...
           </span>
@@ -49,7 +49,7 @@ function Pagination({ currentPage, totalPages, onPageChange }) {
         <button
           key={page}
           onClick={() => onPageChange(page)}
-          className={`px-4 py-2 text-sm border-l border-gray-300 ${
+          className={`px-4 py-2 text-sm border-l border-gray-300 cursor-pointer ${
             currentPage === page
               ? "bg-sky-500 text-white"
               : "bg-white text-sky-500 hover:bg-gray-50"
@@ -63,7 +63,7 @@ function Pagination({ currentPage, totalPages, onPageChange }) {
       <button
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
-        className="px-4 py-2 text-sm border-l border-gray-300 bg-white text-sky-500 disabled:text-gray-400 disabled:cursor-not-allowed"
+        className="px-4 py-2 text-sm border-l border-gray-300 bg-white text-sky-500 disabled:text-gray-400 disabled:cursor-not-allowed cursor-pointer "
       >
         Next
       </button>

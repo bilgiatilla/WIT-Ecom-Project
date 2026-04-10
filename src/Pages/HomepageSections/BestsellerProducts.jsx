@@ -1,16 +1,25 @@
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Bestseller from "../../Components/Bestseller";
+import { fetchProducts, fetchCategories } from "../../store/thunks/productThunks";
 
 function BestsellerProducts() {
-  const products = [
-    { id: 1, image: "src/assets/Bestseller/bestseller1.png" },
-    { id: 2, image: "src/assets/Bestseller/bestseller1.png" },
-    { id: 3, image: "src/assets/Bestseller/bestseller1.png" },
-    { id: 4, image: "src/assets/Bestseller/bestseller1.png" },
-    { id: 5, image: "src/assets/Bestseller/bestseller1.png" },
-    { id: 6, image: "src/assets/Bestseller/bestseller1.png" },
-    { id: 7, image: "src/assets/Bestseller/bestseller1.png" },
-    { id: 8, image: "src/assets/Bestseller/bestseller1.png" },
-  ];
+  const dispatch = useDispatch();
+
+  const productList = useSelector((state) => state.product.productList);
+  const categories = useSelector((state) => state.product.categories);
+  const fetchState = useSelector((state) => state.product.fetchState);
+
+  useEffect(() => {
+    if (!categories.length) {
+      dispatch(fetchCategories());
+    }
+
+    if (!productList.length) {
+      dispatch(fetchProducts({ limit: 8, offset: 0 }));
+    }
+  }, [dispatch, categories.length, productList.length]);
+
   return (
     <section className="px-10 lg:px-40 justify-center">
       <div className="grid gap-3 text-center p-10">
@@ -20,7 +29,13 @@ function BestsellerProducts() {
           Problems trying to resolve the conflict between
         </p>
       </div>
-      <Bestseller/>
+      {fetchState === "FETCHING" && !productList.length ? (
+        <div className="py-20 flex justify-center">
+          <div className="w-12 h-12 border-4 border-gray-300 border-t-blue-500 rounded-full animate-spin"></div>
+        </div>
+      ) : (
+        <Bestseller products={productList.slice(0, 8)} />
+      )}
     </section>
   );
 }

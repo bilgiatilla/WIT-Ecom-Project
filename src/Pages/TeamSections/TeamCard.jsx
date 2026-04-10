@@ -14,9 +14,9 @@ export default function TeamCard({ image, name, role }) {
         <p className="text-sm text-gray-500">{role}</p>
 
         <div className="flex gap-4 text-blue-400 justify-center">
-          <FaFacebookF />
-          <FaInstagram />
-          <FaXTwitter />
+          <FaFacebookF className="cursor-pointer hover:scale-110 transition-transform"/>
+          <FaInstagram className="cursor-pointer hover:scale-110 transition-transform"/>
+          <FaXTwitter className="cursor-pointer hover:scale-110 transition-transform"/>
         </div>
       </div>
     </div>

@@ -16,7 +16,7 @@ function CardForm({
         name="card_no"
         value={formData.card_no}
         onChange={onChange}
-        placeholder="Kart Numarası"
+        placeholder="Card Number"
         className="border rounded-md p-3 md:col-span-2"
         maxLength={19}
         required
@@ -29,7 +29,7 @@ function CardForm({
         className="border rounded-md p-3 bg-white"
         required
       >
-        <option value="">Ay</option>
+        <option value="">Month</option>
         {Array.from({ length: 12 }, (_, i) => i + 1).map((month) => (
           <option key={month} value={month}>
             {month}
@@ -44,7 +44,7 @@ function CardForm({
         className="border rounded-md p-3 bg-white"
         required
       >
-        <option value="">Yıl</option>
+        <option value="">Year</option>
         {Array.from({ length: 12 }, (_, i) => 2025 + i).map((year) => (
           <option key={year} value={year}>
             {year}
@@ -78,7 +78,7 @@ function CardForm({
           onChange={(e) => onToggle3DSecure(e.target.checked)}
           className="w-4 h-4 accent-orange-500"
         />
-        <span className="font-medium">3D Secure ile ödemek istiyorum</span>
+        <span className="font-medium">I want to pay with 3D Secure.</span>
       </div>
 
       <div className="md:col-span-2 flex gap-3">

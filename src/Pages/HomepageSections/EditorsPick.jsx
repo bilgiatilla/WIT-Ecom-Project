@@ -5,96 +5,102 @@ import accImg from "../../assets/Categories/accessories.jpg";
 
 function EditorsPick() {
   return (
-    <section className="pt-15 text-center justify-center">
-      <div className="px-15">
+    <section className="pt-16 text-center">
+      <div className="px-6">
         <h3 className="text-xl font-extrabold">EDITOR'S PICK</h3>
-        <p className="text-sm pt-4">
+        <p className="pt-4 text-sm">
           Problems trying to resolve the conflict between
         </p>
       </div>
-      <div className="grid p-10 gap-8 lg:hidden">
-        <div className="relative">
+
+      <div className="grid gap-6 p-6 lg:hidden">
+        <div className="relative group overflow-hidden">
           <img
             src={menImg}
             alt="Men"
-            className="w-full h-120 object-cover"
+            className="h-105 w-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-110"
           />
-          <h5 className="absolute bottom-5 left-5 bg-white px-15 py-3 text-md font-bold">
+          <h5 className="absolute bottom-5 left-5 bg-white px-8 py-3 text-md font-bold">
             MEN
           </h5>
         </div>
 
-        <div className="relative">
+        <div className="relative group overflow-hidden">
           <img
             src={womenImg}
             alt="Women"
-            className="w-full h-120 object-cover"
+            className="h-105 w-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-110"
           />
-          <h5 className="absolute bottom-5 left-10 bg-white px-8 py-3 text-md font-bold">
+          <h5 className="absolute bottom-5 left-5 bg-white px-8 py-3 text-md font-bold">
             WOMEN
           </h5>
         </div>
 
-        <div className="relative">
+        <div className="relative group overflow-hidden">
           <img
             src={accImg}
             alt="Accessories"
-            className="w-full h-60 object-cover"
+            className="h-55 w-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-110"
           />
-          <h5 className="absolute bottom-5 left-4 bg-white px-8 py-3 text-md font-bold">
+          <h5 className="absolute bottom-5 left-4 bg-white px-6 py-3 text-md font-bold">
             ACCESSORIES
           </h5>
         </div>
 
-        <div className="relative">
+        <div className="relative group overflow-hidden">
           <img
             src={kidsImg}
             alt="Kids"
-            className="w-full h-60 object-cover"
+            className="h-55 w-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-110"
           />
-          <h5 className="absolute bottom-5 left-4 bg-white px-8 py-3 text-md font-bold">
+          <h5 className="absolute bottom-5 left-4 bg-white px-6 py-3 text-md font-bold">
             KIDS
           </h5>
         </div>
       </div>
-      <div className="hidden lg:grid grid-cols-3 gap-8 p-10">
-        <div className="relative">
+
+      <div className="hidden gap-6 p-6 lg:grid lg:grid-cols-3">
+        <div className="relative group overflow-hidden">
           <img
             src={menImg}
-            className="w-full h-120 object-cover"
+            alt="Men"
+            className="h-125 w-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-110"
           />
-          <h5 className="absolute bottom-5 left-5 bg-white px-10 py-2 font-bold">
+          <h5 className="absolute bottom-5 left-5 bg-white px-8 py-3 font-bold cursor-pointer">
             MEN
           </h5>
         </div>
 
-        <div className="relative">
+        <div className="relative group overflow-hidden">
           <img
             src={womenImg}
-            className="w-full h-120 object-cover"
+            alt="Women"
+            className="h-125 w-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-110"
           />
-          <h5 className="absolute bottom-5 left-5 bg-white px-10 py-2 font-bold">
+          <h5 className="absolute bottom-5 left-5 bg-white px-8 py-3 font-bold cursor-pointer">
             WOMEN
           </h5>
         </div>
 
-        <div className="grid grid-rows-2 gap-8">
-          <div className="relative">
+        <div className="grid grid-rows-2 gap-6">
+          <div className="relative group overflow-hidden">
             <img
               src={accImg}
-              className="w-full h-55 object-cover"
+              alt="Accessories"
+              className="h-60 w-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-110"
             />
-            <h5 className="absolute bottom-5 left-4 bg-white px-6 py-2 font-bold">
+            <h5 className="absolute bottom-5 left-4 bg-white px-6 py-3 font-bold cursor-pointer">
               ACCESSORIES
             </h5>
           </div>
 
-          <div className="relative">
+          <div className="relative group overflow-hidden">
             <img
               src={kidsImg}
-              className="w-full h-55 object-cover"
+              alt="Kids"
+              className="h-60 w-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-110"
             />
-            <h5 className="absolute bottom-5 left-4 bg-white px-6 py-2 font-bold">
+            <h5 className="absolute bottom-5 left-4 bg-white px-6 py-3 font-bold cursor-pointer">
               KIDS
             </h5>
           </div>

@@ -83,7 +83,7 @@ function PaymentStep({
               onChange={(e) => onToggle3DSecure(e.target.checked)}
               className="w-4 h-4 accent-orange-500"
             />
-            <span className="font-medium">3D Secure ile ödemek istiyorum</span>
+            <span className="font-medium">I want to pay with 3D Secure</span>
           </div>
         )}
       </div>

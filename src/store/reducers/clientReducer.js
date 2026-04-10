@@ -12,7 +12,12 @@ function clientReducer(state = initialState, action) {
     case "SET_USER":
       return { ...state, user: action.payload };
      case "CLEAR_USER":
-      return { ...state, user: {} };
+      return {
+        ...state,
+        user: {},
+        addressList: [],
+        creditCards: [],
+      };;
     case "SET_ADDRESS_LIST":
       return { ...state, addressList: action.payload }
     case "SET_CREDIT_CARDS":

@@ -1,15 +1,19 @@
 import { ChevronRight } from "lucide-react";
 import { Link } from "react-router-dom";
-import mainImg from "../assets/Team/team-main.png"
+import teamImg1 from "../assets/Team/main1.png"
+import teamImg2 from "../assets/Team/main2.png"
+import teamImg3 from "../assets/Team/main3.png"
+import teamImg4 from "../assets/Team/main4.png"
+import teamImg5 from "../assets/Team/main5.png"
 import TeamSection from "./TeamSections/TeamSection";
 import { FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 
 const smallImages = [
-    { id: 1, src: mainImg, alt: "Model 1" },
-    { id: 2, src: mainImg, alt: "Model 2" },
-    { id: 3, src: mainImg, alt: "Model 3" },
-    { id: 4, src: mainImg, alt: "Model 4" },
+    { id: 1, src: teamImg2, alt: "Model 2" },
+    { id: 2, src: teamImg3, alt: "Model 3" },
+    { id: 3, src: teamImg4, alt: "Model 4" },
+    { id: 4, src: teamImg5, alt: "Model 5" },
   ];
 
 function TeamPage() {
@@ -29,9 +33,9 @@ function TeamPage() {
       <section className="w-full mx-auto bg-white py-10 flex flex-col lg:flex-row gap-1">
       <div className="w-full lg:w-1/2">
         <img
-          src={mainImg}
+          src={teamImg1}
           alt="Main model"
-          className="w-full h-101 object-cover block"
+          className="w-full h-161 object-cover block"
         />
       </div>
       <div className="w-full lg:w-1/2 grid grid-cols-2 gap-1">
@@ -40,7 +44,7 @@ function TeamPage() {
             <img
               src={item.src}
               alt={item.alt}
-              className="w-full h-50 object-cover block"
+              className="w-full h-80 object-cover block"
             />
           </div>
         ))}

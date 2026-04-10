@@ -16,11 +16,11 @@ function CartDropdown() {
   return (
     <div className="absolute right-0 top-full w-90 bg-white border rounded-lg shadow-lg z-50">
       <div className="p-4 border-b">
-        <h3 className="font-bold text-lg">Sepetim ({cart.length} Ürün)</h3>
+        <h3 className="font-bold text-lg">My cart ({cart.length})</h3>
       </div>
 
       {cart.length === 0 ? (
-        <div className="p-4 text-gray-500">Sepetiniz boş.</div>
+        <div className="p-4 text-gray-500">No items in your cart</div>
       ) : (
         <>
           <div className="max-h-100 overflow-y-auto">
@@ -38,7 +38,7 @@ function CartDropdown() {
                   </h4>
 
                   <p className="text-sm text-gray-500 mt-1">
-                    Adet: {item.count}
+                    Pcs: {item.count}
                   </p>
 
                   <p className="text-[#F28D35] font-bold mt-1">
@@ -70,7 +70,7 @@ function CartDropdown() {
                       onClick={() => dispatch(removeFromCart(item.product.id))}
                       className="ml-auto text-red-500 text-sm cursor-pointer"
                     >
-                      Sil
+                      Delete
                     </button>
                   </div>
                 </div>
@@ -81,7 +81,7 @@ function CartDropdown() {
           <div className="p-4 flex gap-3">
             <div className="p-4 border-t">
               <div className="flex justify-between font-bold">
-                <span>Toplam</span>
+                <span>Total</span>
                 <span>₺{totalAmount.toFixed(2)}</span>
               </div>
             </div>
@@ -89,14 +89,14 @@ function CartDropdown() {
               to="/cart"
               className="flex-1 border rounded-md py-2 text-center font-medium hover:bg-gray-50 transition"
             >
-              Sepete Git
+              Go to Cart
             </Link>
 
             <Link
               disabled
               className="flex-1 bg-[#F28D35] text-white rounded-md py-2 text-center font-bold hover:opacity-90 transition"
             >
-              Siparişi Tamamla
+              Checkout
             </Link>
           </div>
         </>

@@ -26,12 +26,12 @@ function ShoppingCartPage() {
     <div className="bg-[#FAFAFA] min-h-screen px-4 py-8 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <h1 className="text-2xl lg:text-3xl font-bold mb-6">
-          Sepetim ({cart.length} Ürün)
+          My Cart ({cart.length})
         </h1>
 
         {cart.length === 0 ? (
           <div className="bg-white rounded-xl border p-8 text-center text-gray-500">
-            Sepetiniz boş.
+            No items in your cart.
           </div>
         ) : (
           <div className="flex flex-col lg:flex-row gap-6 items-start">
@@ -120,7 +120,7 @@ function ShoppingCartPage() {
                               dispatch(removeFromCart(item.product.id))
                             }
                             className="text-gray-500 hover:text-red-500 transition cursor-pointer"
-                            aria-label="Ürünü sil"
+                            aria-label="Delete"
                           >
                             <Trash2 className="w-6 h-6" />
                           </button>
@@ -132,27 +132,21 @@ function ShoppingCartPage() {
               </div>
             </div>
             <div className="w-full lg:w-90 lg:sticky lg:top-6">
-              <button
-                onClick={() => navigate("/create-order")}
-                className="w-full bg-[#F28D35] text-white font-bold rounded-lg py-4 flex items-center justify-center gap-2 cursor-pointer"
-              >
-                Create Order
-                <ChevronRight className="w-5 h-5" />
-              </button>
+ 
 
               <div className="bg-white rounded-xl border p-6 mt-4 shadow-sm">
-                <h2 className="text-3xl font-light mb-6">Sipariş Özeti</h2>
+                <h2 className="text-3xl font-light mb-6">Order summary</h2>
 
                 <div className="space-y-3 text-lg">
                   <div className="flex justify-between gap-4">
-                    <span className="text-gray-600">Ürünlerin Toplamı</span>
+                    <span className="text-gray-600">Subtotal</span>
                     <span className="font-semibold">
                       ₺{productsTotal.toFixed(2)}
                     </span>
                   </div>
 
                   <div className="flex justify-between gap-4">
-                    <span className="text-gray-600">Kargo Toplam</span>
+                    <span className="text-gray-600">Shipping</span>
                     <span className="font-semibold">
                       ₺{shippingTotal.toFixed(2)}
                     </span>
@@ -160,7 +154,7 @@ function ShoppingCartPage() {
 
                   <div className="flex justify-between gap-4">
                     <span className="text-gray-600">
-                      150 TL ve Üzeri Kargo Bedava
+                      Free shipping on orders over 150 TL.
                     </span>
                     <span className="font-semibold text-[#F28D35]">
                       -₺{discount.toFixed(2)}
@@ -171,7 +165,7 @@ function ShoppingCartPage() {
                 <div className="border-t my-5"></div>
 
                 <div className="flex justify-between items-center">
-                  <span className="text-2xl text-gray-700">Toplam</span>
+                  <span className="text-2xl text-gray-700">Total</span>
                   <span className="text-3xl font-bold text-[#F28D35]">
                     ₺{grandTotal.toFixed(2)}
                   </span>

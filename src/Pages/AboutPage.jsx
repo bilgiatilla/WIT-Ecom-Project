@@ -20,7 +20,7 @@ function AboutPage() {
             We know how large objects will act, but things on a small scale just
             do not act that way.
           </h4>
-          <button className="mt-2 rounded-md border px-5 py-3 text-sm font-bold bg-[#23A6F0] text-[white]">
+          <button className="cursor-pointer mt-2 rounded-md border px-5 py-3 text-sm font-bold bg-[#23A6F0] text-[white]">
             Get Quote Now
           </button>
         </div>

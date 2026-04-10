@@ -4,6 +4,7 @@ import vitaImg from "../../assets/vita-cover.png";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import { Link } from "react-router-dom";
 
 function VitaClassic() {
   return (
@@ -26,8 +27,8 @@ function VitaClassic() {
     <h2 className="text-3xl lg:text-6xl font-bold">Vita Classic Product</h2>
     <h4 className="lg:text-2xl">We know how large objects will act, but things on a small scale.</h4>
     <div className="lg:flex lg:flex-row lg:gap-10">
-    <h3 className="font-bold text-2xl lg:text-3xl">$16.48</h3>
-    <button className="bg-[#2DC071] font-bold px-5 py-2 text-sm rounded-sm">ADD TO CART</button>
+    <h3 className="font-bold text-2xl lg:text-3xl py-3">$16.48</h3>
+    <Link to="/shop" className="bg-[#2DC071] font-bold px-5 py-2 text-sm rounded-sm">ADD TO CART</Link>
     </div>
     </div>
   </section>
@@ -44,8 +45,8 @@ function VitaClassic() {
     <h2 className="text-3xl lg:text-6xl font-bold">Vita Classic Product</h2>
     <h4 className="lg:text-2xl">We know how large objects will act, but things on a small scale.</h4>
     <div className="lg:flex lg:flex-row lg:gap-10">
-    <h3 className="font-bold text-2xl lg:text-3xl">$16.48</h3>
-    <button className="bg-[#2DC071] font-bold px-5 py-2 text-sm rounded-sm">ADD TO CART</button>
+    <h3 className="font-bold text-2xl lg:text-3xl py-3">$16.48</h3>
+    <Link to="/shop" className="bg-[#2DC071] font-bold px-5 py-2 text-sm rounded-sm">ADD TO CART</Link>
     </div>
     </div>
   </section>

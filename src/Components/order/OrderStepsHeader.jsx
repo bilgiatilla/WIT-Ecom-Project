@@ -6,16 +6,16 @@ function OrderStepsHeader({ activeStep }) {
           1. Adres Bilgileri
         </h2>
         <p className="text-sm text-gray-500 mt-2">
-          Teslimat ve fatura adresini seçin ya da yeni adres ekleyin.
+          Select your delivery and billing address, or add a new address.
         </p>
       </div>
 
       <div className={`pb-4 pt-4 md:pt-0 md:pl-6 ${activeStep === 2 ? "border-b-4 border-orange-500" : ""}`}>
         <h2 className={`text-2xl font-bold ${activeStep === 2 ? "text-[#F28D35]" : "text-gray-500"}`}>
-          2. Ödeme Seçenekleri
+          2. Payment Options
         </h2>
         <p className="text-sm text-gray-500 mt-2">
-          Kayıtlı kartını seç veya yeni kart ekle.
+          Select a registered card or add a new card.
         </p>
       </div>
     </div>

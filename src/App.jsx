@@ -20,6 +20,7 @@ import ProtectedRoute from "./Components/ProtectedRoute";
 import CreateOrderPage from "./Pages/CreateOrderPage";
 import OrdersPage from "./Pages/OrdersPage";
 import BlogPage from "./Pages/BlogPage";
+import PricingPage from "./Pages/PricingPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -49,6 +50,7 @@ function App() {
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/team" element={<TeamPage />} />
           <Route path="/about" element={<AboutPage />} />
+          <Route path="/pricing" element={<PricingPage />} />
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route

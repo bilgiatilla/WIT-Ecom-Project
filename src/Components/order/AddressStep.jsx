@@ -22,7 +22,7 @@ function AddressStep({
   return (
     <div className="mb-8">
       <div className="flex items-center justify-between gap-4 mb-4">
-        <h3 className="text-xl font-bold">Teslimat Adresi</h3>
+        <h3 className="text-xl font-bold">Delivery Adress</h3>
         <button
           onClick={onAddNewAddress}
           className="bg-[#F28D35] text-white px-4 py-2 rounded-md font-semibold cursor-pointer"
@@ -49,13 +49,13 @@ function AddressStep({
           className="w-4 h-4 accent-orange-500"
         />
         <span className="text-sm text-gray-600">
-          Faturamı aynı adrese gönder
+          Send my invoice to the same address.
         </span>
       </div>
 
       {addressList.length === 0 ? (
         <div className="text-gray-500 border rounded-xl p-6">
-          Kayıtlı adres bulunamadı.
+          No registered address found.
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -76,11 +76,11 @@ function AddressStep({
 
       {!useSameAddress && (
         <div className="mt-8">
-          <h3 className="text-xl font-bold mb-4">Fatura Adresi</h3>
+          <h3 className="text-xl font-bold mb-4">Billing Address</h3>
 
           {addressList.length === 0 ? (
             <div className="text-gray-500 border rounded-xl p-6">
-              Kayıtlı adres bulunamadı.
+              No registered address found.
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

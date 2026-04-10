@@ -18,10 +18,10 @@ function ContactPage() {
           <h3 className="text-2xl font-semibold">Phone ; +451 215 215 </h3>
           <h3 className="text-2xl font-semibold py-3">Fax : +451 215 215</h3>
           <div className="flex justify-center gap-5">
-            <i className="fa-brands fa-x-twitter text-2xl"></i>
-            <i className="fa-brands fa-square-facebook text-2xl"></i>
-            <i className="fa-brands fa-instagram text-2xl"></i>
-            <i className="fa-brands fa-linkedin text-2xl"></i>
+            <i className="fa-brands fa-x-twitter text-2xl cursor-pointer hover:scale-110 transition-transform"></i>
+            <i className="fa-brands fa-square-facebook text-2xl cursor-pointer hover:scale-110 transition-transform"></i>
+            <i className="fa-brands fa-instagram text-2xl cursor-pointer hover:scale-110 transition-transform"></i>
+            <i className="fa-brands fa-linkedin text-2xl cursor-pointer hover:scale-110 transition-transform"></i>
           </div>
         </div>
         <div className="relative flex justify-center items-center py-10">
@@ -45,7 +45,7 @@ function ContactPage() {
               <h6>georgia.young@ple.com</h6>
             </div>
             <h5>Get Support</h5>
-            <button className="mt-2 rounded-md border px-5 py-3 text-sm font-bold border-[#23A6F0] text-[#23A6F0]">
+            <button className="cursor-pointer mt-2 rounded-md border px-5 py-3 text-sm font-bold border-[#23A6F0] text-[#23A6F0]">
               Submit Request
             </button>
           </div>
@@ -56,7 +56,7 @@ function ContactPage() {
               <h6>georgia.young@ple.com</h6>
             </div>
             <h5 className="text-[#FFFFFF]">Get Support</h5>
-            <button className="mt-2 rounded-md border px-5 py-3 text-sm font-bold border-[#23A6F0] text-[#23A6F0]">
+            <button className="cursor-pointer mt-2 rounded-md border px-5 py-3 text-sm font-bold border-[#23A6F0] text-[#23A6F0]">
               Submit Request
             </button>
           </div>
@@ -67,7 +67,7 @@ function ContactPage() {
               <h6>georgia.young@ple.com</h6>
             </div>
             <h5>Get Support</h5>
-            <button className="mt-2 rounded-md border px-5 py-3 text-sm font-bold border-[#23A6F0] text-[#23A6F0]">
+            <button className="cursor-pointer mt-2 rounded-md border px-5 py-3 text-sm font-bold border-[#23A6F0] text-[#23A6F0]">
               Submit Request
             </button>
           </div>
@@ -76,7 +76,7 @@ function ContactPage() {
           <img src={arrow} className="size-16" />
           <h5 className="text-lg pt-3">WE Can't WAIT TO MEET YOU</h5>
           <h1 className="text-6xl py-8">Let’s Talk</h1>
-          <button className="mt-2 rounded-md border px-5 py-3 text-sm font-bold bg-[#23A6F0] text-[white]">
+          <button className="cursor-pointer mt-2 rounded-md border px-5 py-3 text-sm font-bold bg-[#23A6F0] text-[white]">
             Try it free now
           </button>
         </div>
