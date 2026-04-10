@@ -30,6 +30,9 @@ function Header() {
 
   const totalCount = cart.reduce((sum, item) => sum + item.count, 0);
 
+  const favorites = useSelector((state) => state.favorites.favorites);
+  const favoritesCount = favorites.length;
+
   const closeMobileMenu = () => {
     setIsMobileMenuOpen(false);
   };
@@ -139,7 +142,11 @@ function Header() {
                 type="button"
                 className="flex items-center gap-2 cursor-pointer"
               >
-                <Gravatar email={user.email} size={40} className="rounded-full" />
+                <Gravatar
+                  email={user.email}
+                  size={40}
+                  className="rounded-full"
+                />
                 <span className="font-semibold text-sm">{user.name}</span>
                 <ChevronDown size={16} />
               </button>
@@ -150,12 +157,20 @@ function Header() {
                     {user.email}
                   </div>
 
+                  <Link
+                    to="/orders"
+                    onClick={() => setShowUserDropdown(false)}
+                    className="block w-full text-left px-4 py-3 text-gray-700 hover:bg-gray-100 transition"
+                  >
+                    My Orders
+                  </Link>
+
                   <button
                     type="button"
                     onClick={handleLogout}
                     className="w-full text-left px-4 py-3 text-red-500 hover:bg-gray-100 transition"
                   >
-                    Çıkış Yap
+                    Sign Out
                   </button>
                 </div>
               )}
@@ -192,7 +207,18 @@ function Header() {
             {showCartDropdown && <CartDropdown />}
           </div>
 
-          <Heart className="cursor-pointer hover:scale-110 transition-transform" />
+          <Link
+            to="/favorites"
+            className="relative cursor-pointer hover:scale-110 transition-transform"
+          >
+            <Heart />
+
+            {favoritesCount > 0 && (
+              <span className="absolute -top-2 -right-3 bg-orange-500 text-white text-xs min-w-5 h-5 px-1 rounded-full flex items-center justify-center">
+                {favoritesCount}
+              </span>
+            )}
+          </Link>
         </div>
       </div>
 

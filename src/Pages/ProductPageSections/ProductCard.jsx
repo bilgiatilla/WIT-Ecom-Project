@@ -6,14 +6,19 @@ import {
   ShoppingCart,
 } from "lucide-react";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../store/actions/shoppingCartActions";
+import { toggleFavorite } from "../../store/actions/favoritesActions";
 
 function ProductCard({ product }) {
   const dispatch = useDispatch();
   const images = product?.images?.length ? product.images : [];
   const [selectedIndex, setSelectedIndex] = useState(0);
-
+  const favorites = useSelector((state) => state.favorites.favorites);
+  const isFavorite = favorites.some((item) => item.id === product.id);
+  const handleToggleFavorite = () => {
+    dispatch(toggleFavorite(product));
+  };
   useEffect(() => {
     setSelectedIndex(0);
   }, [product]);
@@ -125,7 +130,19 @@ function ProductCard({ product }) {
           <button className="bg-[#23A6F0] text-white rounded-md py-2 px-6">
             Select Options
           </button>
-          <Heart className="border size-9 p-2 rounded-full" />
+          <button
+            type="button"
+            onClick={handleToggleFavorite}
+            className={`border size-9 p-2 rounded-full cursor-pointer transition flex items-center justify-center ${
+              isFavorite ? "bg-red-50 border-red-400" : "hover:bg-gray-100"
+            }`}
+          >
+            <Heart
+              className={`w-full h-full ${
+                isFavorite ? "fill-red-500 text-red-500" : ""
+              }`}
+            />
+          </button>
           <button
             onClick={handleAddToCart}
             className="border size-9 p-2 rounded-full cursor-pointer hover:bg-gray-100 transition flex items-center justify-center"

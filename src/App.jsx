@@ -21,6 +21,7 @@ import CreateOrderPage from "./Pages/CreateOrderPage";
 import OrdersPage from "./Pages/OrdersPage";
 import BlogPage from "./Pages/BlogPage";
 import PricingPage from "./Pages/PricingPage";
+import FavoritesPage from "./Pages/FavoritesPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -53,6 +54,7 @@ function App() {
           <Route path="/pricing" element={<PricingPage />} />
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/favorites" element={<FavoritesPage />} />
           <Route
             path="/create-order"
             element={
