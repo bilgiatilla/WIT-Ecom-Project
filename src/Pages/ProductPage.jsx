@@ -38,29 +38,34 @@ function ProductPage() {
     );
   }
 
-  if (!productDetail) {
-    return null;
-  }
-  return (
-     <div>
-      <div className="flex flex-row justify-center gap-5 pt-5 font-bold">
-        <Link to="/">Home</Link>
-        <ChevronRight />
-        <Link to="/shop" className="text-[#737373]">
-          Shop
-        </Link>
-      </div>
+  if (!productDetail) return null;
 
-      <div className="px-6 lg:px-40 pt-6">
-        <button
-          onClick={() => navigate(-1)}
-          className="border px-4 py-2 rounded-md font-bold hover:bg-gray-100 transition"
-        >
-          Geri
-        </button>
+  return (
+    <div>
+      <div className="px-6 lg:px-40 pt-6 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+        <div className="flex justify-center lg:justify-start flex-1">
+          <div className="flex items-center gap-3 font-bold">
+            <Link to="/">Home</Link>
+            <ChevronRight />
+            <Link to="/shop" className="text-[#737373]">
+              Shop
+            </Link>
+          </div>
+        </div>
+
+        <div className="flex justify-end">
+          <button
+            onClick={() => navigate(-1)}
+            className="border px-5 py-2 rounded-md font-bold cursor-pointer 
+                       hover:bg-black hover:text-white transition"
+          >
+            Back
+          </button>
+        </div>
       </div>
 
       <ProductCard product={productDetail} />
+
       <DescriptionSection product={productDetail} />
 
       <h2 className="font-bold text-center text-xl lg:text-start lg:px-40">
@@ -72,4 +77,5 @@ function ProductPage() {
     </div>
   );
 }
+
 export default ProductPage;

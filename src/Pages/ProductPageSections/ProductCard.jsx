@@ -1,10 +1,4 @@
-import {
-  ChevronLeft,
-  ChevronRight,
-  Eye,
-  Heart,
-  ShoppingCart,
-} from "lucide-react";
+import { ChevronLeft, ChevronRight, Eye, Heart } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../store/actions/shoppingCartActions";
@@ -15,13 +9,16 @@ function ProductCard({ product }) {
   const images = product?.images?.length ? product.images : [];
   const [selectedIndex, setSelectedIndex] = useState(0);
   const favorites = useSelector((state) => state.favorites.favorites);
+
   const isFavorite = favorites.some((item) => item.id === product.id);
-  const handleToggleFavorite = () => {
-    dispatch(toggleFavorite(product));
-  };
+
   useEffect(() => {
     setSelectedIndex(0);
   }, [product]);
+
+  const handleToggleFavorite = () => {
+    dispatch(toggleFavorite(product));
+  };
 
   const handleAddToCart = () => {
     dispatch(addToCart(product));
@@ -76,11 +73,11 @@ function ProductCard({ product }) {
               <button
                 key={index}
                 onClick={() => setSelectedIndex(index)}
-                className={`border-2 rounded-md overflow-hidden ${
+                className={`border-2 rounded-md overflow-hidden cursor-pointer ${
                   selectedIndex === index
                     ? "border-blue-500"
                     : "border-transparent"
-                } cursor-pointer`}
+                }`}
               >
                 <img
                   src={image.url}
@@ -127,9 +124,13 @@ function ProductCard({ product }) {
         </div>
 
         <div className="flex flex-row justify-between lg:justify-start lg:gap-5 pt-10">
-          <button className="bg-[#23A6F0] text-white rounded-md py-2 px-6">
-            Select Options
+          <button
+            onClick={handleAddToCart}
+            className="bg-[#23A6F0] text-white rounded-md py-3 px-6 font-semibold cursor-pointer hover:bg-[#1b8ed1] transition"
+          >
+            Add to Cart
           </button>
+
           <button
             type="button"
             onClick={handleToggleFavorite}
@@ -143,13 +144,13 @@ function ProductCard({ product }) {
               }`}
             />
           </button>
+
           <button
-            onClick={handleAddToCart}
+            type="button"
             className="border size-9 p-2 rounded-full cursor-pointer hover:bg-gray-100 transition flex items-center justify-center"
           >
-            <ShoppingCart className="w-full h-full" />
+            <Eye className="w-full h-full" />
           </button>
-          <Eye className="border size-9 p-2 rounded-full" />
         </div>
       </div>
     </div>
