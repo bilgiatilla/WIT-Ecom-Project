@@ -14,10 +14,10 @@ import {
 } from "../store/thunks/clientThunks";
 import { createOrder } from "../store/thunks/orderThunks";
 import { emptyAddressForm, emptyCardForm } from "../constants/orderForms";
-import OrderStepsHeader from "../components/order/OrderStepsHeader";
-import OrderSummary from "../components/order/OrderSummary";
-import AddressStep from "../components/order/AddressStep";
-import PaymentStep from "../components/order/PaymentStep";
+import OrderStepsHeader from "../Components/order/OrderStepsHeader";
+import OrderSummary from "../Components/order/OrderSummary";
+import AddressStep from "../Components/order/AddressStep";
+import PaymentStep from "../Components/order/PaymentStep";
 
 function CreateOrderPage() {
   const dispatch = useDispatch();
